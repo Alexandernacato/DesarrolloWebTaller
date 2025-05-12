@@ -1,3 +1,5 @@
+com\espe\sistemaregistroforestal\controller\TreeSpeciesController.class
+com\espe\sistemaregistroforestal\Inserccion.class
 com\espe\sistemaregistroforestal\JakartaRestConfiguration.class
 com\espe\sistemaregistroforestal\service\ZonesService.class
 com\espe\sistemaregistroforestal\dao\ConservationActivitiesDAO.class
