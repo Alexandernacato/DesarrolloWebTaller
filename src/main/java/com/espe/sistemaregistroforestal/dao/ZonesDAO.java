@@ -17,7 +17,7 @@ import java.math.BigDecimal;
  */
 public class ZonesDAO {
 
-    public boolean crear(Zones zona) {
+    public static boolean crear(Zones zona) {
         String sql = "INSERT INTO zones (nombre, ubicacion, provincia, tipo_bosque, area_ha, descripcion, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = ConnectionBdd.getConexion();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -41,7 +41,7 @@ public class ZonesDAO {
         }
     }
 
-    public Zones obtenerPorId(int id) {
+    public static Zones obtenerPorId(int id) {
         String sql = "SELECT * FROM zones WHERE id = ?";
         Zones zona = null;
         try (Connection conn = ConnectionBdd.getConexion();
@@ -65,7 +65,7 @@ public class ZonesDAO {
         return zona;
     }
 
-    public List<Zones> obtenerTodos() {
+    public static  List<Zones> obtenerTodos() {
         List<Zones> zonas = new ArrayList<>();
         String sql = "SELECT * FROM zones";
         try (Connection conn = ConnectionBdd.getConexion();
@@ -89,7 +89,7 @@ public class ZonesDAO {
         return zonas;
     }
 
-    public boolean actualizar(Zones zona) {
+    public static boolean actualizar(Zones zona) {
         String sql = "UPDATE zones SET nombre = ?, ubicacion = ?, provincia = ?, tipo_bosque = ?, area_ha = ?, descripcion = ?, fecha_registro = ? WHERE id = ?";
         try (Connection conn = ConnectionBdd.getConexion();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
