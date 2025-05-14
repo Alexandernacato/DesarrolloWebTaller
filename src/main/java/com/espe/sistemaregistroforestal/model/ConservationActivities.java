@@ -10,8 +10,10 @@ public class ConservationActivities {
     private TipoActividad tipoActividad;
     private String descripcion;
     private int zonaId;
+    private boolean activo; 
 
     public ConservationActivities() {
+        this.activo = true;
     }
 
     public ConservationActivities(int id, String nombreActividad, LocalDate fechaActividad, String responsable, TipoActividad tipoActividad, String descripcion, int zonaId) {
@@ -22,6 +24,7 @@ public class ConservationActivities {
         this.tipoActividad = tipoActividad;
         this.descripcion = descripcion;
         this.zonaId = zonaId;
+        this.activo = activo;
     }
 
     public TipoActividad getTipoActividad() {
@@ -78,5 +81,13 @@ public class ConservationActivities {
 
     public void setZonaId(int zonaId) {
         this.zonaId = zonaId;
+    }
+    
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 }

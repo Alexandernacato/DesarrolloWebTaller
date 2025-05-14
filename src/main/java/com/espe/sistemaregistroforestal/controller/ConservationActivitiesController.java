@@ -34,6 +34,11 @@ public class ConservationActivitiesController extends HttpServlet {
                 request.setAttribute("actividad", actividad);
                 request.getRequestDispatcher("/ActivitiesFrm.jsp").forward(request, response);
                 break;
+            case "delete":
+                int deleteId = Integer.parseInt(request.getParameter("id"));
+                service.borrarActividadLogica(deleteId); // Llamada al servicio para realizar el borrado lógico
+                response.sendRedirect(request.getContextPath() + "/ConservationActivities"); // Redirigir de vuelta a la lista
+                break;    
             default:
                 List<ConservationActivities> lista = service.listarActividades();
                 request.setAttribute("listaActividades", lista);

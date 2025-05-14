@@ -14,7 +14,7 @@ public class ConservationActivitiesDAO {
     
      public List<ConservationActivities> listarActividades() {
         List<ConservationActivities> lista = new ArrayList<>();
-        String sql = "SELECT * FROM conservation_activities";
+        String sql = "SELECT * FROM conservation_activities WHERE activo = TRUE";
 
         try (Connection conn = ConnectionBdd.getConexion();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -45,8 +45,8 @@ public class ConservationActivitiesDAO {
     }
 
     public void insertarActividad(ConservationActivities actividad) {
-        String sql = "INSERT INTO conservation_activities (nombre_actividad, fecha_actividad, responsable, tipo_actividad, descripcion, zona_id) VALUES (?, ?, ?, ?, ?, ?)";
-
+        String sql = "INSERT INTO conservation_activities (nombre_actividad, fecha_actividad, responsable, tipo_actividad, descripcion, zona_id, activo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        
         try (Connection conn = ConnectionBdd.getConexion();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -60,6 +60,8 @@ public class ConservationActivitiesDAO {
             stmt.setString(5, actividad.getDescripcion());
             stmt.setInt(6, actividad.getZonaId());
 
+            stmt.setBoolean(7, actividad.isActivo());
+        
             stmt.executeUpdate();
 
             ResultSet generatedKeys = stmt.getGeneratedKeys();
@@ -95,6 +97,7 @@ public class ConservationActivitiesDAO {
 
                 actividad.setDescripcion(rs.getString("descripcion"));
                 actividad.setZonaId(rs.getInt("zona_id"));
+                actividad.setActivo(rs.getBoolean("activo"));
             }
 
         } catch (SQLException e) {
@@ -127,4 +130,16 @@ public class ConservationActivitiesDAO {
             e.printStackTrace();
         }
     }
+    
+    public void borrarActividadLogica(int id) {
+    String sql = "UPDATE conservation_activities SET activo = FALSE WHERE id = ?";
+
+    try (Connection conn = ConnectionBdd.getConexion();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setInt(1, id);
+        stmt.executeUpdate();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
 }
