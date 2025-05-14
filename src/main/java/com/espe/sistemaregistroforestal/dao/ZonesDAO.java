@@ -65,25 +65,48 @@ public class ZonesDAO {
         return zona;
     }
 
-    public static  List<Zones> obtenerTodos() {
+    public static List<Zones> obtenerTodos() {
         List<Zones> zonas = new ArrayList<>();
         String sql = "SELECT * FROM zones";
         try (Connection conn = ConnectionBdd.getConexion();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
+            
+            System.out.println("Ejecutando consulta: " + sql);
+            int count = 0;
+            
             while (rs.next()) {
+                count++;
                 Zones zona = new Zones();
                 zona.setId(rs.getInt("id"));
                 zona.setNombre(rs.getString("nombre"));
+                System.out.println("Zona encontrada: ID=" + zona.getId() + ", Nombre=" + zona.getNombre());
+                
+                // Imprimir el valor de tipo_bosque directamente de la BD
+                String tipoBosqueStr = rs.getString("tipo_bosque");
+                System.out.println("Tipo bosque en BD: " + tipoBosqueStr);
+                
+                try {
+                    zona.setTipo_bosque(TipoBosque.fromString(tipoBosqueStr));
+                } catch (Exception e) {
+                    System.err.println("Error al convertir tipo_bosque '" + tipoBosqueStr + "': " + e.getMessage());
+                    zona.setTipo_bosque(TipoBosque.OTRO);
+                }
+                
+                // Continuar con el resto de campos...
                 zona.setUbicacion(rs.getString("ubicacion"));
                 zona.setProvincia(rs.getString("provincia"));
-                zona.setTipo_bosque(TipoBosque.fromString(rs.getString("tipo_bosque"))); // MODIFICADO
                 zona.setArea_ha(rs.getBigDecimal("area_ha"));
                 zona.setDescripcion(rs.getString("descripcion"));
                 zona.setFecha_registro(rs.getDate("fecha_registro"));
                 zonas.add(zona);
             }
+            System.out.println("Total de zonas recuperadas: " + count);
         } catch (SQLException e) {
+            System.err.println("Error SQL al obtener zonas: " + e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("Error general al obtener zonas: " + e.getMessage());
             e.printStackTrace();
         }
         return zonas;
