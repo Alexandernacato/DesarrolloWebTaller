@@ -64,10 +64,10 @@ import java.sql.Statement;
 
         stmt.executeUpdate();
 
-        // Obtener el ID generado automáticamente
+       
         ResultSet generatedKeys = stmt.getGeneratedKeys();
         if (generatedKeys.next()) {
-            int idGenerado = generatedKeys.getInt(1);  // El ID generado está en la primera columna
+            int idGenerado = generatedKeys.getInt(1);  
             System.out.println("ID insertado: " + idGenerado);
         }
 
