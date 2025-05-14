@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>Lista de Zonas</h1>
-    <p><a href="${pageContext.request.contextPath}/zones?action=new">Agregar Nueva Zona</a></p>
+    <p><a href="${pageContext.request.contextPath}/zones?option=new">Agregar Nueva Zona</a></p>
     <table border="1">
         <thead>
             <tr>
@@ -36,8 +36,8 @@
                     <td><c:out value="${zone.descripcion}"/></td>
                     <td><fmt:formatDate value="${zone.fecha_registro}" pattern="dd/MM/yyyy"/></td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/zones?action=edit&id=${zone.id}">Editar</a>
-                        <a href="${pageContext.request.contextPath}/zones?action=delete&id=${zone.id}" onclick="return confirm('¿Está seguro de eliminar esta zona?');">Eliminar</a>
+                        <a href="${pageContext.request.contextPath}/zones?option=edit&id=${zone.id}">Editar</a>
+                        <a href="${pageContext.request.contextPath}/zones?option=delete&id=${zone.id}" onclick="return confirm('¿Está seguro de eliminar esta zona?');">Eliminar</a>
                     </td>
                 </tr>
             </c:forEach>
