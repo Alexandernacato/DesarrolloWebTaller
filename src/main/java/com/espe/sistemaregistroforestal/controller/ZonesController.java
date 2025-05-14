@@ -52,6 +52,8 @@ public class ZonesController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String option = request.getParameter("option");
+
         String idParam = request.getParameter("id");
         String nombre = request.getParameter("nombre");
         String ubicacion = request.getParameter("ubicacion");

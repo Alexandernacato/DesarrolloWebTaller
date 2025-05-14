@@ -45,7 +45,7 @@
         <input type="date" id="fecha_registro" name="fecha_registro" value="${formattedFechaRegistro}"><br><br>
         
         <input type="submit" value="${empty zone.id || zone.id == 0 ? 'Guardar' : 'Actualizar'}">
-        <a href="${pageContext.request.contextPath}/zones?action=list">Cancelar</a>
+        <a href="${pageContext.request.contextPath}/zones?option=findAll">Cancelar</a>
     </form>
 </body>
 </html>
