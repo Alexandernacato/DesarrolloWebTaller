@@ -45,31 +45,37 @@ public class ConservationActivitiesDAO {
     }
 
     public void insertarActividad(ConservationActivities actividad) {
-        String sql = "INSERT INTO conservation_activities (nombre_actividad, fecha_actividad, responsable, tipo_actividad, descripcion, zona_id, activo) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        
-        try (Connection conn = ConnectionBdd.getConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        String sqlActividad = "INSERT INTO conservation_activities (nombre_actividad, fecha_actividad, responsable, tipo_actividad, descripcion, zona_id, activo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sqlConservacionZona = "INSERT INTO conservation_zona (conservation_id, zona_id) VALUES (?, ?)";
 
-            stmt.setString(1, actividad.getNombreActividad());
-            stmt.setDate(2, java.sql.Date.valueOf(actividad.getFechaActividad()));
-            stmt.setString(3, actividad.getResponsable());
+        try (Connection conn = ConnectionBdd.getConexion()) {
+            // Insertar en conservation_activities y obtener id generado
+            try (PreparedStatement stmt = conn.prepareStatement(sqlActividad, Statement.RETURN_GENERATED_KEYS)) {
+                stmt.setString(1, actividad.getNombreActividad());
+                stmt.setDate(2, java.sql.Date.valueOf(actividad.getFechaActividad()));
+                stmt.setString(3, actividad.getResponsable());
+                stmt.setString(4, actividad.getTipoActividad().getDisplayName());
+                stmt.setString(5, actividad.getDescripcion());
+                stmt.setInt(6, actividad.getZonaId());
+                stmt.setBoolean(7, actividad.isActivo());
+                stmt.executeUpdate();
 
-            // Enum -> String para la BD
-            stmt.setString(4, actividad.getTipoActividad().getDisplayName());
+                ResultSet generatedKeys = stmt.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    int idGenerado = generatedKeys.getInt(1);
+                    System.out.println("ID insertado: " + idGenerado);
 
-            stmt.setString(5, actividad.getDescripcion());
-            stmt.setInt(6, actividad.getZonaId());
-
-            stmt.setBoolean(7, actividad.isActivo());
-        
-            stmt.executeUpdate();
-
-            ResultSet generatedKeys = stmt.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                int idGenerado = generatedKeys.getInt(1);
-                System.out.println("ID insertado: " + idGenerado);
+                    // Insertar en tabla intermedia conservation_zona
+                    try (PreparedStatement stmtZona = conn.prepareStatement(sqlConservacionZona)) {
+                        stmtZona.setInt(1, idGenerado);
+                        stmtZona.setInt(2, actividad.getZonaId());
+                        stmtZona.executeUpdate();
+                        System.out.println("Insertado en conservation_zona: activity_id = " + idGenerado + ", zona_id = " + actividad.getZonaId());
+                    }
+                } else {
+                    System.out.println("No se pudo obtener el ID generado para la actividad.");
+                }
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
