@@ -70,7 +70,7 @@
         <!-- Pie del modal -->
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary">${empty zone.id || zone.id == 0 ? 'Guardar' : 'Actualizar'}</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
     </form>
 </body>

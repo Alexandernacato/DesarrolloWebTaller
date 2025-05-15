@@ -25,6 +25,8 @@ public class ZonesController extends HttpServlet {
         String option = request.getParameter("option");
         if (option == null) option = "findAll";
 
+        System.out.println("ZonesController.doGet() con option: " + option);
+
         switch (option) {
             case "new":
                 request.setAttribute("tiposBosque", TipoBosque.values());
@@ -52,8 +54,9 @@ public class ZonesController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String option = request.getParameter("option");
-
+        System.out.println("ZonesController.doPost() ejecutándose");
+        
+        // Obtener todos los parámetros
         String idParam = request.getParameter("id");
         String nombre = request.getParameter("nombre");
         String ubicacion = request.getParameter("ubicacion");
@@ -63,32 +66,43 @@ public class ZonesController extends HttpServlet {
         String descripcion = request.getParameter("descripcion");
         String fechaRegistroParam = request.getParameter("fecha_registro");
 
+        // Depuración
+        System.out.println("ID: " + idParam);
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Ubicación: " + ubicacion);
+        System.out.println("Provincia: " + provincia);
+        System.out.println("Tipo Bosque: " + tipoBosqueParam);
+        System.out.println("Área (ha): " + areaHaParam);
+        System.out.println("Descripción: " + descripcion);
+        System.out.println("Fecha Registro: " + fechaRegistroParam);
+
+        // Crear y llenar el objeto
         Zones zone = new Zones();
         zone.setNombre(nombre);
         zone.setUbicacion(ubicacion);
         zone.setProvincia(provincia);
         zone.setTipo_bosque(TipoBosque.fromString(tipoBosqueParam));
         
+        // Validar y convertir área en hectáreas
         if (areaHaParam != null && !areaHaParam.isEmpty()) {
             zone.setArea_ha(new BigDecimal(areaHaParam.replace(",", ".")));
         }
         
         zone.setDescripcion(descripcion);
         
+        // Manejar la fecha
         if (fechaRegistroParam != null && !fechaRegistroParam.isEmpty()) {
-            zone.setFecha_registro(Date.valueOf(fechaRegistroParam));
+            try {
+                zone.setFecha_registro(Date.valueOf(fechaRegistroParam));
+            } catch (IllegalArgumentException e) {
+                System.err.println("Error al parsear fecha: " + e.getMessage());
+                zone.setFecha_registro(new Date(System.currentTimeMillis()));
+            }
         } else {
             zone.setFecha_registro(new Date(System.currentTimeMillis()));
         }
 
-        if (idParam == null || idParam.isEmpty()) {
-            zonesService.insertarZona(zone);
-        } else {
-            zone.setId(Integer.parseInt(idParam));
-            zonesService.actualizarZona(zone);
-        }
-
-        if ("save".equals(option)) {
+        // Determinar si es inserción o actualización
         if (idParam == null || idParam.isEmpty() || "0".equals(idParam)) {
             System.out.println("Insertando nueva zona: " + zone.getNombre());
             zonesService.insertarZona(zone);
@@ -97,15 +111,8 @@ public class ZonesController extends HttpServlet {
             zone.setId(Integer.parseInt(idParam));
             zonesService.actualizarZona(zone);
         }
-        
-        // Si la solicitud proviene de AJAX, envía una respuesta adecuada
-        if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
-            response.setContentType("application/json");
-            response.getWriter().write("{\"success\":true}");
-            return;
-        }
-    }
 
+        // Redirección después de guardar
         response.sendRedirect(request.getContextPath() + "/zones");
     }
 }
