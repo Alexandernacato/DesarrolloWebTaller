@@ -6,14 +6,23 @@
     
     <!-- Configuración de sesión -->
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
     
     <!-- Página de bienvenida -->
     <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-</welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <!-- Configuración del Servlet -->
+    <servlet>
+        <servlet-name>ZonesController</servlet-name>
+        <servlet-class>com.espe.sistemaregistroforestal.controller.ZonesController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ZonesController</servlet-name>
+        <url-pattern>/zones</url-pattern>
+    </servlet-mapping>
 
 </web-app>

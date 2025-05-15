@@ -9,4 +9,4 @@
   <p>Más detalles sobre tu aplicación o un resumen del contenido.</p>
 </div>
 
-<%@ include file="footer.jsp" %> <!-- Incluye el footer -->
+<%@ include f.ile="footer.jsp" %> <!-- Incluye el footer -->

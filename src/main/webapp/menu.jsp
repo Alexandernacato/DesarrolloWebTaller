@@ -119,11 +119,11 @@
         <a href="index.jsp">Mi App</a>
       </header>
       <ul class="nav">
-        <li><a href="index.jsp"><i class="zmdi zmdi-view-dashboard"></i> Inicio</a></li>
-        <li><a href="Activities.jsp"><i class="zmdi zmdi-calendar"></i> Actividades</a></li>
-        <li><a href="TreeSpecies.jsp"><i class="zmdi zmdi-nature-people"></i> Especies</a></li>
-        <li><a href="Zones.jsp"><i class="zmdi zmdi-map"></i> Zonas</a></li>
-      </ul>
+    <li><a href="${pageContext.request.contextPath}/Home"><i class="zmdi zmdi-view-dashboard"></i> Inicio</a></li>
+    <li><a href="${pageContext.request.contextPath}/activities"><i class="zmdi zmdi-calendar"></i> Actividades</a></li>
+    <li><a href="${pageContext.request.contextPath}/TreeSpecies"><i class="zmdi zmdi-nature-people"></i> Especies</a></li>
+    <li><a href="${pageContext.request.contextPath}/zones"><i class="zmdi zmdi-map"></i> Zonas</a></li>
+</ul>
     </div>
     
     <!-- Contenido -->

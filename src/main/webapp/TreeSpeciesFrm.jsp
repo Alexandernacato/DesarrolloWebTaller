@@ -1,65 +1,57 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>${empty zone.id || zone.id == 0 ? 'Agregar' : 'Editar'} Zona</title>
+</head>
+<body>
+    <h1>${empty zone.id || zone.id == 0 ? 'Agregar Nueva Zona' : 'Editar Zona'}</h1>
 
-<!-- Encabezado del modal -->
-<div class="modal-header">
-    <h5 class="modal-title">${treeSpecies != null ? "Editar Especie" : "Nueva Especie"}</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-</div>
+    <form action="${pageContext.request.contextPath}/zones" method="post">
+        <!-- Campo ID (oculto) -->
+        <input type="hidden" name="id" value="${empty zone.id ? 0 : zone.id}">
 
-<!-- Formulario dentro del cuerpo del modal -->
-<form action="${pageContext.request.contextPath}/TreeSpecies" method="post">
-    <div class="modal-body">
-        <c:if test="${treeSpecies != null}">
-            <input type="hidden" name="id" value="${treeSpecies.id}" />
-        </c:if>
+        <!-- Nombre -->
+        <label for="nombre">Nombre:</label><br>
+        <input type="text" id="nombre" name="nombre" value="${zone.nombre}" required><br><br>
 
-        <div class="mb-3">
-            <label class="form-label">Nombre Común:</label>
-            <input type="text" class="form-control" name="nombreComun" value="${treeSpecies != null ? treeSpecies.nombreComun : ''}" required />
-        </div>
+        <!-- Ubicación -->
+        <label for="ubicacion">Ubicación:</label><br>
+        <input type="text" id="ubicacion" name="ubicacion" value="${zone.ubicacion}" required><br><br>
 
-        <div class="mb-3">
-            <label class="form-label">Nombre Científico:</label>
-            <input type="text" class="form-control" name="nombreCientifico" value="${treeSpecies != null ? treeSpecies.nombreCientifico : ''}" required />
-        </div>
+        <!-- Provincia -->
+        <label for="provincia">Provincia:</label><br>
+        <input type="text" id="provincia" name="provincia" value="${zone.provincia}"><br><br>
 
-        <div class="mb-3">
-            <label class="form-label">Familia Botánica:</label>
-            <input type="text" class="form-control" name="familiaBotanica" value="${treeSpecies != null ? treeSpecies.familiaBotanica : ''}" required />
-        </div>
+        <!-- Tipo de Bosque -->
+        <label for="tipo_bosque">Tipo de Bosque:</label><br>
+        <select id="tipo_bosque" name="tipo_bosque" required>
+            <c:forEach var="tipo" items="${tiposBosque}">
+                <option value="${tipo.name()}" ${zone.tipo_bosque.name() == tipo.name() ? 'selected' : ''}>
+                    <c:out value="${tipo.displayName}"/>
+                </option>
+            </c:forEach>
+        </select><br><br>
 
-        <div class="mb-3">
-            <label class="form-label" for="estadoConservacion">Estado de Conservación</label>
-            <select name="estadoConservacion" id="estadoConservacion" class="form-select">
-                <option value="No Evaluado">No Evaluado</option>
-                <option value="Preocupación Menor">Preocupación Menor</option>
-                <option value="Vulnerable">Vulnerable</option>
-                <option value="En Peligro">En Peligro</option>
-                <option value="En Peligro Crítico">En Peligro Crítico</option>
-                <option value="Extinto">Extinto</option>
-            </select>
-        </div>
+        <!-- Área en hectáreas -->
+        <label for="area_ha">Área (ha):</label><br>
+        <input type="number" step="0.01" id="area_ha" name="area_ha" value="${zone.area_ha}" required><br><br>
 
-        <div class="mb-3">
-            <label class="form-label">Uso Principal:</label>
-            <input type="text" class="form-control" name="usoPrincipal" value="${treeSpecies != null ? treeSpecies.usoPrincipal : ''}" required />
-        </div>
+        <!-- Descripción -->
+        <label for="descripcion">Descripción:</label><br>
+        <textarea id="descripcion" name="descripcion" rows="4" cols="50">${zone.descripcion}</textarea><br><br>
 
-        <div class="mb-3">
-            <label class="form-label">Altura Máxima (m):</label>
-            <input type="number" step="0.1" class="form-control" name="alturaMaximaM" value="${treeSpecies != null ? treeSpecies.alturaMaximaM : ''}" required />
-        </div>
+        <!-- Fecha de Registro -->
+        <label for="fecha_registro">Fecha Registro:</label><br>
+        <fmt:formatDate value="${zone.fecha_registro}" pattern="yyyy-MM-dd" var="formattedFechaRegistro"/>
+        <input type="date" id="fecha_registro" name="fecha_registro" value="${formattedFechaRegistro}"><br><br>
 
-        <div class="mb-3">
-            <label class="form-label">ID de Zona:</label>
-            <input type="number" class="form-control" name="zonaId" value="${treeSpecies != null ? treeSpecies.zonaId : ''}" required />
-        </div>
-    </div>
-
-    <!-- Pie del modal -->
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-primary">Guardar</button>
-    </div>
-</form>
+        <!-- Botones -->
+        <input type="submit" value="${empty zone.id || zone.id == 0 ? 'Guardar' : 'Actualizar'}">
+        <a href="${pageContext.request.contextPath}/zones">Cancelar</a>
+    </form>
+</body>
+</html>
