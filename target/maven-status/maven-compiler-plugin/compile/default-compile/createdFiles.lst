@@ -1,7 +1,9 @@
+com\espe\sistemaregistroforestal\controller\ConservationActivitiesController.class
 com\espe\sistemaregistroforestal\controller\TreeSpeciesController.class
-com\espe\sistemaregistroforestal\Inserccion.class
 com\espe\sistemaregistroforestal\JakartaRestConfiguration.class
+com\espe\sistemaregistroforestal\model\TipoActividad.class
 com\espe\sistemaregistroforestal\service\ZonesService.class
+com\espe\sistemaregistroforestal\controller\ZonesController.class
 com\espe\sistemaregistroforestal\dao\ConservationActivitiesDAO.class
 com\espe\sistemaregistroforestal\service\TreeSpeciesService.class
 com\espe\sistemaregistroforestal\service\ConservativonActivitiesService.class
@@ -10,6 +12,7 @@ com\espe\sistemaregistroforestal\dao\TreeSpeciesDAO.class
 com\espe\sistemaregistroforestal\model\ConservationActivities.class
 com\espe\sistemaregistroforestal\dao\ConnectionBdd.class
 com\espe\sistemaregistroforestal\model\Zones.class
+com\espe\sistemaregistroforestal\model\TipoBosque.class
 com\espe\sistemaregistroforestal\resources\JakartaEE10Resource.class
 com\espe\sistemaregistroforestal\TestConnection.class
 com\espe\sistemaregistroforestal\model\TreeSpecies.class

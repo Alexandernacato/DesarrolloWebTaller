@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.espe.sistemaregistroforestal.dao;
 
 import java.sql.Connection;
@@ -15,7 +11,7 @@ import java.sql.SQLException;
 public class ConnectionBdd {
      private static final String URL = "jdbc:mysql://localhost:3306/registro_forestal?useSSL=false&allowPublicKeyRetrieval=true";
     private static final String USER = "root";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "root";
     
     static {
         try {

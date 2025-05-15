@@ -1,13 +1,42 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.espe.sistemaregistroforestal.service;
 
-/**
- *
- * @author alexa
- */
+import com.espe.sistemaregistroforestal.dao.ZonesDAO;
+import com.espe.sistemaregistroforestal.model.Zones;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class ZonesService {
-    
+    private final ZonesDAO zonesDAO;
+    private static final Logger LOGGER = Logger.getLogger(ZonesService.class.getName());
+
+    public ZonesService() {
+        this.zonesDAO = new ZonesDAO();
+        LOGGER.info("ZonesService inicializado");
+    }
+
+    public List<Zones> listarZonas() {
+ 
+        return zonesDAO.obtenerTodos();
+    }
+
+    public Zones obtenerPorId(int id) {
+      
+        return zonesDAO.obtenerPorId(id);
+    }
+
+    public void insertarZona(Zones zone) {
+        
+        zonesDAO.crear(zone);
+    }
+
+    public void actualizarZona(Zones zone) {
+ 
+        zonesDAO.actualizar(zone);
+    }
+
+    public void eliminarZona(int id) {
+        
+        zonesDAO.eliminar(id);
+    }
 }
