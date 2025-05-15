@@ -15,22 +15,34 @@
     <!-- DataTables CSS -->
     <link href="https://cdn.datatables.net/2.3.0/css/dataTables.bootstrap5.css" rel="stylesheet">
     <style>
+    /* Reemplazar el estilo existente del contenedor */
     .container {
-        margin-left: 250px; /* Puedes ajustar a lo que mida tu sidebar */
+        margin-left: auto !important; /* Cambiar de 250px a auto */
+        margin-right: auto !important; /* Para centrar */
+        max-width: 1200px; /* Limitar el ancho máximo */
         transition: margin-left 0.3s ease;
+        padding: 0 15px; /* Añadir padding para no pegar a los bordes */
     }
-
-    @media (max-width: 768px) {
-        .container {
-            margin-left: 0;
-        }
+    
+    /* Asegurarse de que la tabla ocupe todo el ancho disponible */
+    table#zonesTable {
+        width: 100% !important;
+    }
+    
+    /* Centrar el botón de agregar */
+    .btn-action-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
     }
 </style>
 </head>
 <body>
     <div class="container mt-5">
         <h2 class="text-center mb-4">Lista de Zonas</h2>
-        <a href="${pageContext.request.contextPath}/zones?option=new" class="btn btn-primary mb-3" id="abrirModal">Agregar Nueva Zona</a>
+        <div class="text-center mb-3">
+            <a href="${pageContext.request.contextPath}/zones?option=new" class="btn btn-primary" id="abrirModal">Agregar Nueva Zona</a>
+        </div>
         
         <table id="zonesTable" class="table table-bordered table-striped">
             <thead class="thead-dark">
