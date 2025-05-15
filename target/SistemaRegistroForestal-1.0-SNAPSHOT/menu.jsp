@@ -8,24 +8,21 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
-/* === Variables base === */
 :root {
-    --primary-color: #005f40;
-    --primary-hover: #007a52;
-    --accent-color: #ffc107;
+    --primary-color: #f8f9fa; /* Cambiado a un tono blanquecino/gris muy claro */
+    --primary-hover: #e9ecef; /* Color hover más claro */
+    --accent-color: #005f40; /* El verde ahora es el acento */
     --text-light: #ffffff;
     --text-dark: #333333;
     --transition: 0.3s ease;
 }
 
-/* Reset básico */
 body {
-    margin: 0;
     font-family: 'Poppins', sans-serif;
-    background-color: #f4f6f8;
-    transition: margin-left var(--transition);
+    padding-top: 70px; /* Espacio para la navbar fija */
 }
 
+/* Barra de navegación superior */
 .navbar {
     background-color: var(--primary-color);
     padding: 0.7rem 1rem;
@@ -33,7 +30,7 @@ body {
 }
 
 .navbar-brand {
-    color: var(--text-light) !important;
+    color: var(--accent-color) !important; /* Cambiado a verde */
     font-weight: 600;
     font-size: 1.4rem;
     display: flex;
@@ -43,12 +40,12 @@ body {
 .navbar-brand i {
     font-size: 1.5rem;
     margin-right: 10px;
-    color: var(--accent-color);
+    color: var(--accent-color); /* Cambiado a verde */
 }
 
 .navbar .navbar-toggler {
     border: none;
-    color: var(--text-light);
+    color: var(--accent-color); /* Cambiado a verde */
 }
 
 .navbar .navbar-toggler:focus {
@@ -56,11 +53,11 @@ body {
 }
 
 .navbar .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(0, 95, 64, 0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); /* Cambiado a verde */
 }
 
 .navbar-nav .nav-link {
-    color: var(--text-light) !important;
+    color: var(--text-dark) !important; /* Cambiado a texto oscuro */
     font-weight: 500;
     padding: 0.8rem 1.2rem;
     border-radius: 4px;
@@ -71,7 +68,8 @@ body {
 
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link.active {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 95, 64, 0.1); /* Cambiado a verde con transparencia */
+    color: var(--accent-color) !important; /* Texto verde en hover/activo */
 }
 
 .navbar-nav .nav-link.active::after {
@@ -82,12 +80,13 @@ body {
     transform: translateX(-50%);
     width: 40px;
     height: 3px;
-    background-color: var(--accent-color);
+    background-color: var(--accent-color); /* Línea verde */
     border-radius: 3px 3px 0 0;
 }
 
 .navbar-nav .nav-link i {
     margin-right: 6px;
+    color: var(--accent-color); /* Íconos verdes */
 }
 
 /* Estilos responsive */
