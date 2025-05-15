@@ -1,151 +1,161 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Menú Principal</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-design-iconic-font@2.2.0/dist/css/material-design-iconic-font.min.css">
-  <style>
-    /* Estilo base del menú */
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<style>
+/* === Variables base === */
+:root {
+    --sidebar-bg: #1e2a38;
+    --sidebar-hover: #273747;
+    --accent-color: #00b894;
+    --text-color: #ecf0f1;
+    --transition: 0.3s ease;
+    --header-height: 60px;
+}
+
+/* Reset bÃ¡sico */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f6f8;
+    transition: margin-left var(--transition);
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 240px;
+    background-color: var(--sidebar-bg);
+    padding-top: var(--header-height);
+    transition: transform var(--transition);
+    z-index: 1000;
+    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: var(--header-height);
+    width: 240px;
+    background-color: #162029;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid #111;
+    z-index: 1100;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: background var(--transition);
+    font-size: 15px;
+}
+
+.sidebar a:hover {
+    background-color: var(--sidebar-hover);
+}
+
+.sidebar a svg {
+    margin-right: 12px;
+    width: 20px;
+    height: 20px;
+    fill: var(--accent-color);
+    transition: fill var(--transition);
+}
+
+.sidebar a:hover svg {
+    fill: #ffffff;
+}
+
+.menu-toggle {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1200;
+    cursor: pointer;
+    flex-direction: column;
+}
+
+.menu-toggle span {
+    height: 3px;
+    width: 25px;
+    background: var(--sidebar-bg);
+    margin: 5px 0;
+    border-radius: 2px;
+    transition: background var(--transition);
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    body.menu-open {
+        margin-left: 240px;
+    }
+}
+
+@media (min-width: 769px) {
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
+        margin-left: 240px;
     }
+}
+</style>
 
-    #viewport {
-      display: flex;
-      height: 100vh;
-    }
+<!-- BotÃ³n hamburguesa -->
+<div class="menu-toggle" onclick="toggleSidebar()">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
 
-    #sidebar {
-      width: 250px;
-      background-color: #333;
-      color: #fff;
-      padding: 20px;
-      position: fixed;
-      height: 100%;
-    }
-
-    #sidebar header {
-      font-size: 24px;
-      font-weight: bold;
-      color: #fff;
-    }
-
-    .nav {
-      list-style: none;
-      padding: 0;
-    }
-
-    .nav li {
-      margin: 15px 0;
-    }
-
-    .nav li a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 18px;
-      display: flex;
-      align-items: center;
-    }
-
-    .nav li a:hover {
-      text-decoration: underline;
-    }
-
-    /* Íconos del menú */
-    .nav li a i {
-      margin-right: 10px;
-    }
-
-    /* Estilo para el contenido */
-    #content {
-      margin-left: 250px;
-      padding: 20px;
-      width: 100%;
-    }
-
-    /* Estilos del icono de menú en pantallas pequeñas */
-    #menu-icon {
-      display: none;
-      background: #333;
-      width: 30px;
-      height: 30px;
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      cursor: pointer;
-    }
-
-    #menu-icon span {
-      background: white;
-      display: block;
-      height: 4px;
-      margin: 5px 0;
-      width: 100%;
-    }
-
-    /* Responsive */
-    @media screen and (max-width: 768px) {
-      #sidebar {
-        width: 200px;
-      }
-
-      #content {
-        margin-left: 0;
-      }
-
-      #menu-icon {
-        display: block;
-      }
-
-      #sidebar {
-        display: none;
-      }
-
-      #sidebar.active {
-        display: block;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div id="viewport">
-    <!-- Sidebar -->
-    <div id="sidebar">
-      <header>
-        <a href="index.jsp">Mi App</a>
-      </header>
-      <ul class="nav">
-    <li><a href="${pageContext.request.contextPath}/Home"><i class="zmdi zmdi-view-dashboard"></i> Inicio</a></li>
-    <li><a href="${pageContext.request.contextPath}/activities"><i class="zmdi zmdi-calendar"></i> Actividades</a></li>
-    <li><a href="${pageContext.request.contextPath}/TreeSpecies"><i class="zmdi zmdi-nature-people"></i> Especies</a></li>
-    <li><a href="${pageContext.request.contextPath}/zones"><i class="zmdi zmdi-map"></i> Zonas</a></li>
-</ul>
+<!-- Sidebar completo -->
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        ðŸŒ¿ EcoGestiÃ³n
     </div>
-    
-    <!-- Contenido -->
-    <div id="content">
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><i class="zmdi zmdi-notifications text-danger"></i></a></li>
-            <li><a href="#">Usuario</a></li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-  </div>
+    <a href="${pageContext.request.contextPath}/index.jsp">
+        <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        Inicio
+    </a>
+    <a href="${pageContext.request.contextPath}/zones">
+        <svg viewBox="0 0 24 24"><path d="M4 4h6v6H4V4zm0 10h6v6H4v-6zm10 0h6v6h-6v-6zm0-10h6v6h-6V4z"/></svg>
+        Zonas
+    </a>
+    <a href="${pageContext.request.contextPath}/TreeSpecies">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 1 10 10A10 10 0 0 1 12 22A10 10 0 0 1 2 12A10 10 0 0 1 12 2z"/></svg>
+        Especies
+    </a>
+    <a href="${pageContext.request.contextPath}//ConservationActivities">
+        <svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm4 0h14v-2H7v2zm-4 4h2v-2H3v2zm4 0h14v-2H7v2z"/></svg>
+        Actividades
+    </a>
+</div>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $('#header').prepend('<div id="menu-icon"><span class="first"></span><span class="second"></span><span class="third"></span></div>');
-    $("#menu-icon").on("click", function(){
-      $("nav").slideToggle();
-      $(this).toggleClass("active");
-    });
-  </script>
-</body>
-      <!-- Aquí irá el contenido principal de cada página -->
+<!-- Script -->
+<script>
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("active");
+    document.body.classList.toggle("menu-open");
+}
+
+
+</script>

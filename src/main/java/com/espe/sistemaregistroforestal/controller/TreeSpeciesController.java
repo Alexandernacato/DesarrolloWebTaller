@@ -65,12 +65,12 @@ public class TreeSpeciesController extends HttpServlet {
         int zonaId = Integer.parseInt(request.getParameter("zonaId"));
         
         System.out.println("Nombre común: " + nombreComun);
-System.out.println("Nombre científico: " + nombreCientifico);
-System.out.println("Familia botánica: " + familiaBotanica);
-System.out.println("Estado conservación: " + estadoConservacion);
-System.out.println("Uso principal: " + usoPrincipal);
-System.out.println("Altura máxima: " + alturaMaximaM);
-System.out.println("Zona ID: " + zonaId);
+        System.out.println("Nombre científico: " + nombreCientifico);
+        System.out.println("Familia botánica: " + familiaBotanica);
+        System.out.println("Estado conservación: " + estadoConservacion);
+        System.out.println("Uso principal: " + usoPrincipal);
+        System.out.println("Altura máxima: " + alturaMaximaM);
+        System.out.println("Zona ID: " + zonaId);
 
         TreeSpecies treeSpecies = new TreeSpecies();
         treeSpecies.setNombreComun(nombreComun);

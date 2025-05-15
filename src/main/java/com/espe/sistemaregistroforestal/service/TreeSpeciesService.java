@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.espe.sistemaregistroforestal.service;
 
 import com.espe.sistemaregistroforestal.dao.TreeSpeciesDAO;
@@ -13,7 +9,7 @@ import java.util.List;
  * @author alexa
  */
 public class TreeSpeciesService {
-      private final TreeSpeciesDAO treeSpeciesDAO;
+    private final TreeSpeciesDAO treeSpeciesDAO;
 
     public TreeSpeciesService() {
         this.treeSpeciesDAO = new TreeSpeciesDAO();

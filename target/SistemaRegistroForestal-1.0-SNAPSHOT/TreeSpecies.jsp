@@ -1,3 +1,4 @@
+<%@ include file="menu.jsp" %> <!-- Incluye el menú principal -->
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="es">
@@ -9,7 +10,18 @@
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/2.3.0/css/dataTables.bootstrap5.css" rel="stylesheet">
-    
+    <style>
+    .container {
+        margin-left: 250px; /* Puedes ajustar a lo que mida tu sidebar */
+        transition: margin-left 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            margin-left: 0;
+        }
+    }
+</style>
 </head>
 <body>
     <div class="container mt-5">

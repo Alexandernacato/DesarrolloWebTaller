@@ -1,4 +1,5 @@
 C:\Users\alexa\OneDrive\Documentos\NetBeansProjects\SistemaRegistroForestal\src\main\java\com\espe\sistemaregistroforestal\model\TipoBosque.java
+C:\Users\alexa\OneDrive\Documentos\NetBeansProjects\SistemaRegistroForestal\src\main\java\com\espe\sistemaregistroforestal\model\TipoActividad.java
 C:\Users\alexa\OneDrive\Documentos\NetBeansProjects\SistemaRegistroForestal\src\main\java\com\espe\sistemaregistroforestal\dao\ZonesDAO.java
 C:\Users\alexa\OneDrive\Documentos\NetBeansProjects\SistemaRegistroForestal\src\main\java\com\espe\sistemaregistroforestal\model\TreeSpecies.java
 C:\Users\alexa\OneDrive\Documentos\NetBeansProjects\SistemaRegistroForestal\src\main\java\com\espe\sistemaregistroforestal\dao\ConnectionBdd.java
@@ -13,4 +14,5 @@ C:\Users\alexa\OneDrive\Documentos\NetBeansProjects\SistemaRegistroForestal\src\
 C:\Users\alexa\OneDrive\Documentos\NetBeansProjects\SistemaRegistroForestal\src\main\java\com\espe\sistemaregistroforestal\dao\ConservationActivitiesDAO.java
 C:\Users\alexa\OneDrive\Documentos\NetBeansProjects\SistemaRegistroForestal\src\main\java\com\espe\sistemaregistroforestal\service\TreeSpeciesService.java
 C:\Users\alexa\OneDrive\Documentos\NetBeansProjects\SistemaRegistroForestal\src\main\java\com\espe\sistemaregistroforestal\controller\TreeSpeciesController.java
+C:\Users\alexa\OneDrive\Documentos\NetBeansProjects\SistemaRegistroForestal\src\main\java\com\espe\sistemaregistroforestal\controller\ConservationActivitiesController.java
 C:\Users\alexa\OneDrive\Documentos\NetBeansProjects\SistemaRegistroForestal\src\main\java\com\espe\sistemaregistroforestal\TestConnection.java
