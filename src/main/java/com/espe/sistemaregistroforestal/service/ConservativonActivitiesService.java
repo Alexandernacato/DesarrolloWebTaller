@@ -31,4 +31,9 @@ public class ConservativonActivitiesService {
     public void actualizarActividad(ConservationActivities actividad) {
         conservationActivitiesDAO.actualizarActividad(actividad);
     }
+    
+    // Borrado lógico de actividad
+    public void borrarActividadLogica(int id) {
+        conservationActivitiesDAO.borrarActividadLogica(id);
+    }
 }
