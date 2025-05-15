@@ -110,5 +110,45 @@
             $('#zonesTable').DataTable();  // Aplicar DataTables a la tabla
         });
     </script>
+    
+    <!-- Script para manejar el envío del formulario del modal -->
+    <script>
+    $(document).ready(function() {
+        // Delegación de eventos para capturar el envío del formulario dentro del modal
+        $(document).on('submit', '#modalFormulario form', function(e) {
+            e.preventDefault();
+            
+            // Registrar en consola para depuración
+            console.log("Enviando formulario...");
+            
+            // Obtener datos del formulario
+            var formData = $(this).serialize();
+            console.log("Datos: ", formData);
+            
+            // Agregar el parámetro option=save si no está presente
+            if (!formData.includes('option=')) {
+                formData += '&option=save';
+            }
+            
+            // Enviar formulario mediante AJAX
+            $.ajax({
+                url: "${pageContext.request.contextPath}/zones",
+                type: "POST",
+                data: formData,
+                success: function(response) {
+                    console.log("Éxito al guardar");
+                    // Cerrar el modal
+                    $('#modalFormulario').modal('hide');
+                    // Recargar la página para ver los cambios
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error al guardar: ", error);
+                    alert("Error al guardar los datos. Por favor, intenta nuevamente.");
+                }
+            });
+        });
+    });
+    </script>
 </body>
 </html>

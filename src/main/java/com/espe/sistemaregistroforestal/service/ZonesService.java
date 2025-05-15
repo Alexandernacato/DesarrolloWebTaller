@@ -17,22 +17,22 @@ public class ZonesService {
 
     public List<Zones> listarZonas() {
  
-        return zonesDAO.obtenerTodos();
+        return ZonesDAO.obtenerTodos();
     }
 
     public Zones obtenerPorId(int id) {
       
-        return zonesDAO.obtenerPorId(id);
+        return ZonesDAO.obtenerPorId(id);
     }
 
     public void insertarZona(Zones zone) {
         
-        zonesDAO.crear(zone);
+        ZonesDAO.crear(zone);
     }
 
     public void actualizarZona(Zones zone) {
  
-        zonesDAO.actualizar(zone);
+        ZonesDAO.actualizar(zone);
     }
 
     public void eliminarZona(int id) {

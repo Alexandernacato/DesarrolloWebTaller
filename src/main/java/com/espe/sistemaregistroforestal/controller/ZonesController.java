@@ -88,6 +88,24 @@ public class ZonesController extends HttpServlet {
             zonesService.actualizarZona(zone);
         }
 
+        if ("save".equals(option)) {
+        if (idParam == null || idParam.isEmpty() || "0".equals(idParam)) {
+            System.out.println("Insertando nueva zona: " + zone.getNombre());
+            zonesService.insertarZona(zone);
+        } else {
+            System.out.println("Actualizando zona existente ID: " + idParam);
+            zone.setId(Integer.parseInt(idParam));
+            zonesService.actualizarZona(zone);
+        }
+        
+        // Si la solicitud proviene de AJAX, envía una respuesta adecuada
+        if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+            response.setContentType("application/json");
+            response.getWriter().write("{\"success\":true}");
+            return;
+        }
+    }
+
         response.sendRedirect(request.getContextPath() + "/zones");
     }
 }
