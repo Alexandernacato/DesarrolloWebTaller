@@ -1,161 +1,177 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<!-- Link a FontAwesome para iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<!-- Link a Google Fonts para la fuente Poppins -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Link a Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <style>
 /* === Variables base === */
 :root {
-    --sidebar-bg: #1e2a38;
-    --sidebar-hover: #273747;
-    --accent-color: #00b894;
-    --text-color: #ecf0f1;
+    --primary-color: #005f40;
+    --primary-hover: #007a52;
+    --accent-color: #ffc107;
+    --text-light: #ffffff;
+    --text-dark: #333333;
     --transition: 0.3s ease;
-    --header-height: 60px;
 }
 
 /* Reset básico */
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: #f4f6f8;
     transition: margin-left var(--transition);
 }
 
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 240px;
-    background-color: var(--sidebar-bg);
-    padding-top: var(--header-height);
-    transition: transform var(--transition);
-    z-index: 1000;
-    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+.navbar {
+    background-color: var(--primary-color);
+    padding: 0.7rem 1rem;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
 }
 
-.sidebar-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: var(--header-height);
-    width: 240px;
-    background-color: #162029;
+.navbar-brand {
+    color: var(--text-light) !important;
+    font-weight: 600;
+    font-size: 1.4rem;
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: var(--text-color);
-    font-size: 18px;
-    font-weight: bold;
-    border-bottom: 1px solid #111;
-    z-index: 1100;
 }
 
-.sidebar a {
-    display: flex;
-    align-items: center;
-    padding: 14px 20px;
-    text-decoration: none;
-    color: var(--text-color);
-    transition: background var(--transition);
-    font-size: 15px;
+.navbar-brand i {
+    font-size: 1.5rem;
+    margin-right: 10px;
+    color: var(--accent-color);
 }
 
-.sidebar a:hover {
-    background-color: var(--sidebar-hover);
+.navbar .navbar-toggler {
+    border: none;
+    color: var(--text-light);
 }
 
-.sidebar a svg {
-    margin-right: 12px;
-    width: 20px;
-    height: 20px;
-    fill: var(--accent-color);
-    transition: fill var(--transition);
+.navbar .navbar-toggler:focus {
+    box-shadow: none;
 }
 
-.sidebar a:hover svg {
-    fill: #ffffff;
+.navbar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
-.menu-toggle {
-    display: none;
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 1200;
-    cursor: pointer;
-    flex-direction: column;
+.navbar-nav .nav-link {
+    color: var(--text-light) !important;
+    font-weight: 500;
+    padding: 0.8rem 1.2rem;
+    border-radius: 4px;
+    margin: 0 2px;
+    position: relative;
+    transition: var(--transition);
 }
 
-.menu-toggle span {
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-nav .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
     height: 3px;
-    width: 25px;
-    background: var(--sidebar-bg);
-    margin: 5px 0;
-    border-radius: 2px;
-    transition: background var(--transition);
+    background-color: var(--accent-color);
+    border-radius: 3px 3px 0 0;
 }
 
-@media (max-width: 768px) {
-    .sidebar {
-        transform: translateX(-100%);
-    }
-
-    .sidebar.active {
-        transform: translateX(0);
-    }
-
-    .menu-toggle {
-        display: flex;
-    }
-
-    body.menu-open {
-        margin-left: 240px;
-    }
+.navbar-nav .nav-link i {
+    margin-right: 6px;
 }
 
-@media (min-width: 769px) {
-    body {
-        margin-left: 240px;
+/* Estilos responsive */
+@media (max-width: 992px) {
+    .navbar-collapse {
+        background-color: var(--primary-color);
+        padding: 1rem;
+        border-radius: 8px;
+        margin-top: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .navbar-nav .nav-link {
+        padding: 0.8rem 1rem;
+        margin: 4px 0;
+    }
+    
+    .navbar-nav .nav-link.active::after {
+        width: 6px;
+        height: 80%;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 0 3px 3px 0;
     }
 }
 </style>
 
-<!-- Botón hamburguesa -->
-<div class="menu-toggle" onclick="toggleSidebar()">
-    <span></span>
-    <span></span>
-    <span></span>
-</div>
-
-<!-- Sidebar completo -->
-<div class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-        🌿 EcoGestión
+<!-- Barra de navegación horizontal fija en el top -->
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <!-- Logo y nombre del sistema -->
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/Index.jsp">
+            <i class="fas fa-tree"></i>
+            Conservación Forestal
+        </a>
+        
+        <!-- Botón hamburguesa para móviles -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                data-bs-target="#navbarMain" aria-controls="navbarMain" 
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- Menú principal -->
+        <div class="collapse navbar-collapse" id="navbarMain">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link ${pageContext.request.servletPath eq '/Index.jsp' ? 'active' : ''}" 
+                       href="${pageContext.request.contextPath}/Index.jsp">
+                        <i class="fas fa-home"></i> Inicio
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ${pageContext.request.servletPath eq '/zones' ? 'active' : ''}" 
+                       href="${pageContext.request.contextPath}/zones">
+                        <i class="fas fa-map-marked-alt"></i> Zonas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ${pageContext.request.servletPath eq '/TreeSpecies' ? 'active' : ''}" 
+                       href="${pageContext.request.contextPath}/TreeSpecies">
+                        <i class="fas fa-seedling"></i> Especies
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#proyectos">
+                        <i class="fas fa-project-diagram"></i> Proyectos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#educacion">
+                        <i class="fas fa-book-open"></i> Educación
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contacto">
+                        <i class="fas fa-envelope"></i> Contacto
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <a href="${pageContext.request.contextPath}/index.jsp">
-        <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-        Inicio
-    </a>
-    <a href="${pageContext.request.contextPath}/zones">
-        <svg viewBox="0 0 24 24"><path d="M4 4h6v6H4V4zm0 10h6v6H4v-6zm10 0h6v6h-6v-6zm0-10h6v6h-6V4z"/></svg>
-        Zonas
-    </a>
-    <a href="${pageContext.request.contextPath}/TreeSpecies">
-        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 1 10 10A10 10 0 0 1 12 22A10 10 0 0 1 2 12A10 10 0 0 1 12 2z"/></svg>
-        Especies
-    </a>
-    <a href="${pageContext.request.contextPath}//ConservationActivities">
-        <svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm4 0h14v-2H7v2zm-4 4h2v-2H3v2zm4 0h14v-2H7v2z"/></svg>
-        Actividades
-    </a>
-</div>
+</nav>
 
-<!-- Script -->
-<script>
-function toggleSidebar() {
-    const sidebar = document.getElementById("sidebar");
-    sidebar.classList.toggle("active");
-    document.body.classList.toggle("menu-open");
-}
-
-
-</script>
+<!-- Script de Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
