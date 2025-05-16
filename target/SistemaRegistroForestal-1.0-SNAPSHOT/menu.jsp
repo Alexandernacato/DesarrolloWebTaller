@@ -152,10 +152,15 @@ body {
                         <i class="fas fa-seedling"></i> Especies
                     </a>
                 </li>
-               
                 <li class="nav-item">
                     <a class="nav-link" href="">
                         <i class="fas fa-book-open"></i> Reportes
+                    </a>
+                </li>
+               
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/ConservationActivities">
+                        <i class="fas fa-book-open"></i> Actividades de Conservación
                     </a>
                 </li>
                 <li class="nav-item">
