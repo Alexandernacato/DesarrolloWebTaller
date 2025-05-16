@@ -42,9 +42,8 @@ public class ReportesServlet extends HttpServlet {
         String zonaIdParamActividades = request.getParameter("zonaId_filter_actividades");
 
         try (Connection conn = ConnectionBdd.getConexion()) {
-            // Cargar siempre la lista de zonas para el selector de actividades
-            // List<Zones> todasLasZonas = zonesDAO.getAllZonesSimple(); // Línea original incorrecta
-            List<Zones> todasLasZonas = zonesDAO.obtenerTodos(); // CORRECCIÓN: Usar el método existente
+            
+            List<Zones> todasLasZonas = ZonesDAO.obtenerTodos(); // CORRECCIÓN: Usar el método existente
             request.setAttribute("zonasParaFiltro", todasLasZonas);
             if (zonaIdParamActividades != null && !zonaIdParamActividades.isEmpty()) {
                  request.setAttribute("selectedZonaIdActividades", Integer.parseInt(zonaIdParamActividades));
