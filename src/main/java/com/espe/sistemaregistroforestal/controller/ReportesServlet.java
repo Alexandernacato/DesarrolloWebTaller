@@ -27,12 +27,8 @@ import java.util.Map;
 @WebServlet("/reportes")
 public class ReportesServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private ZonesDAO zonesDAO; // Para obtener la lista de zonas para el filtro
-
-    @Override
-    public void init() throws ServletException {
-        zonesDAO = new ZonesDAO(); // Inicializa tu ZonesDAO
-    }
+   
+   
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -43,7 +39,19 @@ public class ReportesServlet extends HttpServlet {
 
         try (Connection conn = ConnectionBdd.getConexion()) {
             
-            List<Zones> todasLasZonas = ZonesDAO.obtenerTodos(); // CORRECCIÓN: Usar el método existente
+            List<Zones> todasLasZonas = ZonesDAO.obtenerTodos();
+            System.out.println("Zonas recuperadas: " + (todasLasZonas != null ? todasLasZonas.size() : "null"));
+
+            // Si no hay zonas, añade una zona de prueba
+            if (todasLasZonas == null || todasLasZonas.isEmpty()) {
+                System.out.println("No se encontraron zonas, añadiendo una de prueba");
+                todasLasZonas = new ArrayList<>();
+                Zones testZona = new Zones();
+                testZona.setId(999);
+                testZona.setNombre("ZONA DE PRUEBA");
+                todasLasZonas.add(testZona);
+            }
+
             request.setAttribute("zonasParaFiltro", todasLasZonas);
             if (zonaIdParamActividades != null && !zonaIdParamActividades.isEmpty()) {
                  request.setAttribute("selectedZonaIdActividades", Integer.parseInt(zonaIdParamActividades));

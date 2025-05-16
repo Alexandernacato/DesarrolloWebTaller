@@ -153,7 +153,7 @@ body {
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/reportes">
                         <i class="fas fa-book-open"></i> Reportes
                     </a>
                 </li>

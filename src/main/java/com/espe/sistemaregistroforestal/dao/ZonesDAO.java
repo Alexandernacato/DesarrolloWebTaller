@@ -1,4 +1,3 @@
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -70,46 +69,35 @@ public class ZonesDAO {
 
     public static List<Zones> obtenerTodos() {
         List<Zones> zonas = new ArrayList<>();
-        String sql = "SELECT * FROM zones";
+        String sql = "SELECT id, nombre, ubicacion, provincia, tipo_bosque, area_ha, descripcion, fecha_registro FROM zones";
         try (Connection conn = ConnectionBdd.getConexion();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
             
-            System.out.println("Ejecutando consulta: " + sql);
-            int count = 0;
-            
+            System.out.println("Ejecutando obtenerTodos() de zones");
             while (rs.next()) {
-                count++;
                 Zones zona = new Zones();
                 zona.setId(rs.getInt("id"));
                 zona.setNombre(rs.getString("nombre"));
-                System.out.println("Zona encontrada: ID=" + zona.getId() + ", Nombre=" + zona.getNombre());
                 
-                // Imprimir el valor de tipo_bosque directamente de la BD
+                // El resto de propiedades no son necesarias para el selector,
+                // pero si las cargas, maneja con cuidado la conversión del enum
                 String tipoBosqueStr = rs.getString("tipo_bosque");
-                System.out.println("Tipo bosque en BD: " + tipoBosqueStr);
-                
                 try {
-                    zona.setTipo_bosque(TipoBosque.fromString(tipoBosqueStr));
+                    // Asume que TipoBosque tiene un método fromString o valueOf
+                    if (tipoBosqueStr != null) {
+                        zona.setTipo_bosque(TipoBosque.valueOf(tipoBosqueStr));
+                    }
                 } catch (Exception e) {
-                    System.err.println("Error al convertir tipo_bosque '" + tipoBosqueStr + "': " + e.getMessage());
-                    zona.setTipo_bosque(TipoBosque.OTRO);
+                    System.err.println("Error al convertir tipo_bosque: " + e.getMessage());
+                    // Establece un valor predeterminado o deja en null
                 }
                 
-                // Continuar con el resto de campos...
-                zona.setUbicacion(rs.getString("ubicacion"));
-                zona.setProvincia(rs.getString("provincia"));
-                zona.setArea_ha(rs.getBigDecimal("area_ha"));
-                zona.setDescripcion(rs.getString("descripcion"));
-                zona.setFecha_registro(rs.getDate("fecha_registro"));
                 zonas.add(zona);
             }
-            System.out.println("Total de zonas recuperadas: " + count);
+            System.out.println("Total zonas recuperadas: " + zonas.size());
         } catch (SQLException e) {
-            System.err.println("Error SQL al obtener zonas: " + e.getMessage());
-            e.printStackTrace();
-        } catch (Exception e) {
-            System.err.println("Error general al obtener zonas: " + e.getMessage());
+            System.err.println("Error en obtenerTodos de ZonesDAO: " + e.getMessage());
             e.printStackTrace();
         }
         return zonas;

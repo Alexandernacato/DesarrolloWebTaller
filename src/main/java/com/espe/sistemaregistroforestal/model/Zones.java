@@ -13,10 +13,12 @@ public class Zones {
     private String descripcion;
     private Date fecha_registro;
 
-    // Constructores
+    // Constructor vacío - NECESARIO para instanciar desde ZonesDAO
     public Zones() {
+        // Constructor vacío necesario
     }
 
+    // Constructores
     public Zones(int id, String nombre, String ubicacion, String provincia, TipoBosque tipo_bosque, BigDecimal area_ha, String descripcion, Date fecha_registro) {
         this.id = id;
         this.nombre = nombre;
