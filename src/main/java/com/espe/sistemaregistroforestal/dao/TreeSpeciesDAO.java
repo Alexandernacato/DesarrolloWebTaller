@@ -47,50 +47,35 @@ import java.sql.Statement;
             return lista;
         }
 
-        public void insertarEspecie(TreeSpecies especie) {
-            String sqlEspecie = "INSERT INTO tree_species (nombre_comun, nombre_cientifico, familia_botanica, estado_conservacion, uso_principal, altura_maxima_m, zona_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            String sqlZonaEspecie = "INSERT INTO zona_especie (zona_id, especie_id) VALUES (?, ?)";
+       public void insertarEspecie(TreeSpecies especie) {
+           
+    String sql = "INSERT INTO tree_species (nombre_comun, nombre_cientifico, familia_botanica, estado_conservacion, uso_principal, altura_maxima_m, zona_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-            try (Connection conn = ConnectionBdd.getConexion();
-                 PreparedStatement stmtEspecie = conn.prepareStatement(sqlEspecie, Statement.RETURN_GENERATED_KEYS)) {
+    try (Connection conn = ConnectionBdd.getConexion();
+         PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {  // Aquí agregamos RETURN_GENERATED_KEYS
 
-                // Insertar en tree_species
-                stmtEspecie.setString(1, especie.getNombreComun());
-                stmtEspecie.setString(2, especie.getNombreCientifico());
-                stmtEspecie.setString(3, especie.getFamiliaBotanica());
-                stmtEspecie.setString(4, especie.getEstadoConservacion());
-                stmtEspecie.setString(5, especie.getUsoPrincipal());
-                stmtEspecie.setDouble(6, especie.getAlturaMaximaM());
-                stmtEspecie.setInt(7, especie.getZonaId());
+        stmt.setString(1, especie.getNombreComun());
+        stmt.setString(2, especie.getNombreCientifico());
+        stmt.setString(3, especie.getFamiliaBotanica());
+        stmt.setString(4, especie.getEstadoConservacion());
+        stmt.setString(5, especie.getUsoPrincipal());
+        stmt.setDouble(6, especie.getAlturaMaximaM());
+        stmt.setInt(7, especie.getZonaId());
 
-                int affectedRows = stmtEspecie.executeUpdate();
+        stmt.executeUpdate();
 
-                if (affectedRows == 0) {
-                    throw new SQLException("Error al insertar la especie, no se generó ninguna fila.");
-                }
-
-                // Obtener el ID generado automáticamente
-                try (ResultSet generatedKeys = stmtEspecie.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        int idGenerado = generatedKeys.getInt(1);
-                        System.out.println("ID insertado: " + idGenerado);
-
-                        // Insertar en zona_especie la relación
-                        try (PreparedStatement stmtZonaEspecie = conn.prepareStatement(sqlZonaEspecie)) {
-                            stmtZonaEspecie.setInt(1, especie.getZonaId());
-                            stmtZonaEspecie.setInt(2, idGenerado);
-                            stmtZonaEspecie.executeUpdate();
-                        }
-                    } else {
-                        throw new SQLException("Error al obtener el ID generado para la especie.");
-                    }
-                }
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        // Obtener el ID generado automáticamente
+        ResultSet generatedKeys = stmt.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            int idGenerado = generatedKeys.getInt(1);  // El ID generado está en la primera columna
+            System.out.println("ID insertado: " + idGenerado);
         }
-        
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
         public TreeSpecies obtenerPorId(int id) {
             TreeSpecies especie = null;
             String sql = "SELECT * FROM tree_species WHERE id = ?";
@@ -157,5 +142,4 @@ import java.sql.Statement;
         }
 
     }
-
 

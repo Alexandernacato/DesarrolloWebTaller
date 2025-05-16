@@ -154,7 +154,7 @@ body {
                 </li>
                
                 <li class="nav-item">
-                    <a class="nav-link" href="#educacion">
+                    <a class="nav-link" href="">
                         <i class="fas fa-book-open"></i> Reportes
                     </a>
                 </li>

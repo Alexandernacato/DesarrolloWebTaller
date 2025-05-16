@@ -152,14 +152,10 @@ body {
                         <i class="fas fa-seedling"></i> Especies
                     </a>
                 </li>
+               
                 <li class="nav-item">
-                    <a class="nav-link" href="#proyectos">
-                        <i class="fas fa-project-diagram"></i> Proyectos
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#educacion">
-                        <i class="fas fa-book-open"></i> Educación
+                    <a class="nav-link" href="">
+                        <i class="fas fa-book-open"></i> Reportes
                     </a>
                 </li>
                 <li class="nav-item">
