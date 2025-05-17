@@ -67,41 +67,46 @@ public class ZonesDAO {
         return zona;
     }
 
-    public static List<Zones> obtenerTodos() {
-        List<Zones> zonas = new ArrayList<>();
-        String sql = "SELECT id, nombre, ubicacion, provincia, tipo_bosque, area_ha, descripcion, fecha_registro FROM zones";
-        try (Connection conn = ConnectionBdd.getConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-            
-            System.out.println("Ejecutando obtenerTodos() de zones");
-            while (rs.next()) {
-                Zones zona = new Zones();
-                zona.setId(rs.getInt("id"));
-                zona.setNombre(rs.getString("nombre"));
-                
-                // El resto de propiedades no son necesarias para el selector,
-                // pero si las cargas, maneja con cuidado la conversión del enum
-                String tipoBosqueStr = rs.getString("tipo_bosque");
-                try {
-                    // Asume que TipoBosque tiene un método fromString o valueOf
+        public static List<Zones> obtenerTodos() {
+            List<Zones> zonas = new ArrayList<>();
+            String sql = "SELECT id, nombre, ubicacion, provincia, tipo_bosque, area_ha, descripcion, fecha_registro FROM zones";
+            try (Connection conn = ConnectionBdd.getConexion();
+                 PreparedStatement stmt = conn.prepareStatement(sql);
+                 ResultSet rs = stmt.executeQuery()) {
+
+                System.out.println("Ejecutando obtenerTodos() de zones");
+                while (rs.next()) {
+                    Zones zona = new Zones();
+                    zona.setId(rs.getInt("id"));
+                    zona.setNombre(rs.getString("nombre"));
+                    zona.setUbicacion(rs.getString("ubicacion"));
+                    zona.setProvincia(rs.getString("provincia"));
+
+                    String tipoBosqueStr = rs.getString("tipo_bosque");
                     if (tipoBosqueStr != null) {
-                        zona.setTipo_bosque(TipoBosque.valueOf(tipoBosqueStr));
+                        try {
+                            zona.setTipo_bosque(TipoBosque.fromString(tipoBosqueStr));
+                        } catch (Exception e) {
+                            System.err.println("Error al convertir tipo_bosque: " + e.getMessage());
+                            zona.setTipo_bosque(TipoBosque.OTRO); // Valor predeterminado
+                        }
+                    } else {
+                        zona.setTipo_bosque(TipoBosque.OTRO); // Valor predeterminado si es null
                     }
-                } catch (Exception e) {
-                    System.err.println("Error al convertir tipo_bosque: " + e.getMessage());
-                    // Establece un valor predeterminado o deja en null
+
+                    zona.setArea_ha(rs.getBigDecimal("area_ha"));
+                    zona.setDescripcion(rs.getString("descripcion"));
+                    zona.setFecha_registro(rs.getDate("fecha_registro"));
+
+                    zonas.add(zona);
                 }
-                
-                zonas.add(zona);
+                System.out.println("Total zonas recuperadas: " + zonas.size());
+            } catch (SQLException e) {
+                System.err.println("Error en obtenerTodos de ZonesDAO: " + e.getMessage());
+                e.printStackTrace();
             }
-            System.out.println("Total zonas recuperadas: " + zonas.size());
-        } catch (SQLException e) {
-            System.err.println("Error en obtenerTodos de ZonesDAO: " + e.getMessage());
-            e.printStackTrace();
+            return zonas;
         }
-        return zonas;
-    }
 
     public static boolean actualizar(Zones zona) {
         String sql = "UPDATE zones SET nombre = ?, ubicacion = ?, provincia = ?, tipo_bosque = ?, area_ha = ?, descripcion = ?, fecha_registro = ? WHERE id = ?";
