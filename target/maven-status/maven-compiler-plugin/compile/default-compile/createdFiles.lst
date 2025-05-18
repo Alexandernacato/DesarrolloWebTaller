@@ -7,11 +7,13 @@ com\espe\sistemaregistroforestal\controller\ZonesController.class
 com\espe\sistemaregistroforestal\dao\ConservationActivitiesDAO.class
 com\espe\sistemaregistroforestal\service\TreeSpeciesService.class
 com\espe\sistemaregistroforestal\service\ConservativonActivitiesService.class
+com\espe\sistemaregistroforestal\dao\ZonesDAO.class
 com\espe\sistemaregistroforestal\dao\TreeSpeciesDAO.class
 com\espe\sistemaregistroforestal\model\ConservationActivities.class
 com\espe\sistemaregistroforestal\dao\ConnectionBdd.class
 com\espe\sistemaregistroforestal\model\Zones.class
 com\espe\sistemaregistroforestal\model\TipoBosque.class
+com\espe\sistemaregistroforestal\controller\ReportesServlet.class
 com\espe\sistemaregistroforestal\resources\JakartaEE10Resource.class
 com\espe\sistemaregistroforestal\TestConnection.class
 com\espe\sistemaregistroforestal\model\TreeSpecies.class
