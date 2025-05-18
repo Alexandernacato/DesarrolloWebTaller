@@ -5,6 +5,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
     <title>${empty zone.id || zone.id == 0 ? 'Agregar' : 'Editar'} Zona</title>
 </head>
 <body>
@@ -15,7 +16,7 @@
         <h5 class="modal-title">${empty zone.id || zone.id == 0 ? 'Nueva Zona' : 'Editar Zona'}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
     </div>
-
+  
     <!-- Formulario dentro del cuerpo del modal -->
     <form action="${pageContext.request.contextPath}/zones" method="post" id="zonaForm">
         <div class="modal-body">
@@ -72,6 +73,8 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
+        
     </form>
+ <script src="${pageContext.request.contextPath}/JS/validacion.js"></script>
 </body>
 </html>

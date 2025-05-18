@@ -51,9 +51,14 @@ public class ReportesServlet extends HttpServlet {
                 }
             }
 
-            request.setAttribute("reporteEspeciesZonaFijo", getGenericReportData(conn, "especiesPorZonaSimple"));
-            request.setAttribute("reporteConteoEspeciesEstado", getConteoEspeciesPorEstadoConservacion(conn));
-            request.setAttribute("reporteZonasConDetalles", getZonasConAreaYConteoEspecies(conn));
+                request.setAttribute("reporteEspeciesZonaFijo", getGenericReportData(conn, "especiesPorZonaSimple"));
+                request.setAttribute("reporteConteoEspeciesEstado", getConteoEspeciesPorEstadoConservacion(conn));
+                request.setAttribute("reporteZonasConDetalles", getZonasConAreaYConteoEspecies(conn));
+                request.setAttribute("reporteCantidadZonasPorTipoActividad", getCantidadZonasPorTipoActividad(conn));
+                request.setAttribute("reporteCantidadEspeciesPorZona", getCantidadEspeciesPorZona(conn));
+                request.setAttribute("reporteActividadesPorMes", getActividadesPorMes(conn));
+
+
 
         } catch (SQLException | NumberFormatException e) {
             e.printStackTrace();
@@ -174,4 +179,69 @@ public class ReportesServlet extends HttpServlet {
         }
         return results;
     }
+    
+        private List<Map<String, Object>> getCantidadZonasPorTipoActividad(Connection conn) throws SQLException {
+            List<Map<String, Object>> resultados = new ArrayList<>();
+            String sql = "SELECT tipo_actividad, COUNT(DISTINCT zona_id) AS cantidad_zonas " +
+                         "FROM conservation_activities " +
+                         "WHERE activo = TRUE " +
+                         "GROUP BY tipo_actividad " +
+                         "ORDER BY tipo_actividad";
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql);
+                 ResultSet rs = stmt.executeQuery()) {
+                ResultSetMetaData md = rs.getMetaData();
+                int columnas = md.getColumnCount();
+                while (rs.next()) {
+                    Map<String, Object> fila = new LinkedHashMap<>();
+                    for (int i = 1; i <= columnas; i++) {
+                        fila.put(md.getColumnLabel(i), rs.getObject(i));
+                    }
+                    resultados.add(fila);
+                }
+            }
+            return resultados;
+        }
+        
+        private List<Map<String, Object>> getCantidadEspeciesPorZona(Connection conn) throws SQLException {
+            List<Map<String, Object>> resultados = new ArrayList<>();
+            String sql = "SELECT z.nombre AS \"Zona\", COUNT(ts.id) AS \"Cantidad de Especies\" " +
+                         "FROM zones z LEFT JOIN tree_species ts ON z.id = ts.zona_id " +
+                         "GROUP BY z.nombre ORDER BY z.nombre";
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql);
+                 ResultSet rs = stmt.executeQuery()) {
+                ResultSetMetaData md = rs.getMetaData();
+                int columnas = md.getColumnCount();
+                while (rs.next()) {
+                    Map<String, Object> fila = new LinkedHashMap<>();
+                    for (int i = 1; i <= columnas; i++) {
+                        fila.put(md.getColumnLabel(i), rs.getObject(i));
+                    }
+                    resultados.add(fila);
+                }
+            }
+            return resultados;
+        }
+        
+        
+        private List<Map<String, Object>> getActividadesPorMes(Connection conn) throws SQLException {
+            List<Map<String, Object>> resultados = new ArrayList<>();
+            String sql = "SELECT YEAR(fecha_actividad) AS anio, MONTH(fecha_actividad) AS mes, COUNT(*) AS total_actividades " +
+                         "FROM conservation_activities WHERE activo = 1 GROUP BY anio, mes ORDER BY anio, mes";
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql);
+                 ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Map<String, Object> fila = new HashMap<>();
+                    fila.put("anio", rs.getInt("anio"));
+                    fila.put("mes", rs.getInt("mes"));
+                    fila.put("total_actividades", rs.getInt("total_actividades"));
+                    resultados.add(fila);
+                }
+            }
+
+            return resultados;
+        }
+
 }

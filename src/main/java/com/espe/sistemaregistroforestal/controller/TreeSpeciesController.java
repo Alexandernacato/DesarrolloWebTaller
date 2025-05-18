@@ -64,6 +64,17 @@ public class TreeSpeciesController extends HttpServlet {
         double alturaMaximaM = Double.parseDouble(request.getParameter("alturaMaximaM"));
         int zonaId = Integer.parseInt(request.getParameter("zonaId"));
         
+        System.out.println("Verificando existencia de zona con ID: " + zonaId);
+        
+  if (!treeSpeciesService.validarZonaExistente(zonaId)) {
+    response.setContentType("text/html;charset=UTF-8");
+    PrintWriter out = response.getWriter();
+    out.println("<script>");
+    out.println("alert('La zona con ID " + zonaId + " no existe.');");
+    out.println("window.history.back();");  // Esto hace que el formulario se mantenga en la misma página
+    out.println("</script>");
+    return;  // Evita que el código posterior se ejecute si la zona no existe
+}    
         System.out.println("Nombre común: " + nombreComun);
         System.out.println("Nombre científico: " + nombreCientifico);
         System.out.println("Familia botánica: " + familiaBotanica);
@@ -80,6 +91,8 @@ public class TreeSpeciesController extends HttpServlet {
         treeSpecies.setUsoPrincipal(usoPrincipal);
         treeSpecies.setAlturaMaximaM(alturaMaximaM);
         treeSpecies.setZonaId(zonaId);
+        
+
 
         if (idParam == null || idParam.isEmpty()) {
             treeSpeciesService.insertarEspecie(treeSpecies);

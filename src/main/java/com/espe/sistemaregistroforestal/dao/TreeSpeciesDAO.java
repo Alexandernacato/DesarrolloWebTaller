@@ -140,6 +140,29 @@ import java.sql.Statement;
                 e.printStackTrace();
             }
         }
+        public boolean validarZonaExistente(int zonaId) {
+    String sql = "SELECT COUNT(*) FROM zones WHERE id = ?";
+    
+    try (Connection conn = ConnectionBdd.getConexion();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        
+        stmt.setInt(1, zonaId);  // Asignamos el valor de zonaId al parámetro de la consulta
+        ResultSet rs = stmt.executeQuery();
+        
+        if (rs.next()) {
+            int count = rs.getInt(1);  // Obtenemos el número de registros que coinciden con el ID
+            return count > 0;  // Si count > 0, la zona existe
+        }
+        
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    
+    return false;  // Si no existe, retornamos false
+}
+
+
+
 
     }
 

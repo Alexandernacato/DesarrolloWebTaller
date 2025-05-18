@@ -74,3 +74,4 @@
         <button type="submit" class="btn btn-primary"><%= actividad == null ? "Agregar" : "Actualizar" %></button>
     </div>
 </form>
+ <script src="${pageContext.request.contextPath}/JS/validacion.js"></script>
