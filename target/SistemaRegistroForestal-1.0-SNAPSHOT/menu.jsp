@@ -141,6 +141,11 @@ body {
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/reportes">
+                        <i class="fas fa-chart-column"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link ${pageContext.request.servletPath eq '/zones' ? 'active' : ''}" 
                        href="${pageContext.request.contextPath}/zones">
                         <i class="fas fa-map-marked-alt"></i> Zonas
@@ -151,21 +156,10 @@ body {
                        href="${pageContext.request.contextPath}/TreeSpecies">
                         <i class="fas fa-seedling"></i> Especies
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/reportes">
-                        <i class="fas fa-book-open"></i> Reportes
-                    </a>
-                </li>
-               
+                </li>               
                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/ConservationActivities">
                         <i class="fas fa-book-open"></i> Actividades de Conservación
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contacto">
-                        <i class="fas fa-envelope"></i> Contacto
                     </a>
                 </li>
             </ul>
