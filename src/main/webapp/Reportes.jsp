@@ -50,6 +50,27 @@
             margin-bottom: 30px;
             font-weight: 600;
         }
+        
+        .same-height-row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .same-height-row > [class*='col-'] {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .same-height-row > [class*='col-'] > .card {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .same-height-row > [class*='col-'] > .card > .card-body {
+            flex-grow: 1;
+        }
+
     </style>
 </head>
 <body>
@@ -57,7 +78,7 @@
     <h2 class="text-center page-title">Especies existentes en cada Zona</h2>
 
     <!-- Primera fila: Cantidad de Especies por Zona -->
-    <div class="row mb-4">
+    <div class="row mb-4 same-height-row">
         <!-- Tabla Cantidad de Especies por Zona -->
         <div class="col-lg-6 col-md-12">
             <div class="card">
@@ -97,7 +118,7 @@
     </div>
 
     <!-- Segunda fila: Cantidad de Zonas por Tipo de Actividad -->
-    <div class="row mb-4">
+    <div class="row mb-4 same-height-row">
         <!-- Tabla Cantidad de Zonas por Tipo de Actividad -->
         <div class="col-lg-6 col-md-12">
             <div class="card">
@@ -137,90 +158,40 @@
             <div class="card">
                 <div class="card-header"><i class="fas fa-chart-pie"></i> Cantidad de Zonas por Tipo de Actividad (Gráfico)</div>
                 <div class="card-body">
-                    <canvas id="chartZonasPorActividad" style="max-width: 100%; max-height: 400px;"></canvas>
+                    <canvas id="chartZonasPorActividad" style="max-width: 100%; max-height: 300px;"></canvas>
                 </div>
             </div>
         </div>
     </div>
         
-<!-- Tercera fila: Actividades por Mes -->
-<div class="row mb-4">
-    <!-- Tabla Actividades por Mes -->
-    <div class="col-lg-6 col-md-12">
-        <div class="card">
-            <div class="card-header"><i class="fas fa-calendar-alt"></i> Actividades por Mes (Tabla)</div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <c:choose>
-                        <c:when test="${not empty reporteActividadesPorMes}">
-                            <table class="table table-striped table-hover table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Año</th>
-                                        <th>Mes</th>
-                                        <th>Total de Actividades</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach var="fila" items="${reporteActividadesPorMes}">
-                                        <tr>
-                                            <td><c:out value="${fila.anio}" /></td>
-                                            <td><c:out value="${fila.mes}" /></td>
-                                            <td><c:out value="${fila.total_actividades}" /></td>
-                                        </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
-                        </c:when>
-                        <c:otherwise>
-                            <p class="text-center text-muted">No hay datos disponibles.</p>
-                        </c:otherwise>
-                    </c:choose>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Gráfico Actividades por Mes -->
-    <div class="col-lg-6 col-md-12">
-        <div class="card">
-            <div class="card-header"><i class="fas fa-chart-line"></i> Actividades por Mes (Gráfico)</div>
-            <div class="card-body">
-                <canvas id="chartActividadesPorMes" style="max-width: 100%; max-height: 400px;"></canvas>
-            </div>
-        </div>
-    </div>
-</div>
-
-    
-        <!-- Tarjeta 1: Tabla Especies por Zona -->
+    <!-- Tercera fila: Actividades por Mes -->
+    <div class="row mb-4 same-height-row">
+        <!-- Tabla Actividades por Mes -->
         <div class="col-lg-6 col-md-12">
             <div class="card">
-                <div class="card-header"><i class="fas fa-tree"></i> Especies Registradas por Zona</div>
+                <div class="card-header"><i class="fas fa-calendar-alt"></i> Actividades por Mes (Tabla)</div>
                 <div class="card-body">
-                    
                     <div class="table-responsive">
                         <c:choose>
-                            <c:when test="${not empty reporteEspeciesZonaFijo}">
+                            <c:when test="${not empty reporteActividadesPorMes}">
                                 <table class="table table-striped table-hover table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Zona</th>
-                                            <th>Especie</th>
-                                            <th>Nombre Científico</th>
+                                            <th>Año</th>
+                                            <th>Mes</th>
+                                            <th>Total de Actividades</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="fila" items="${reporteEspeciesZonaFijo}">
+                                        <c:forEach var="fila" items="${reporteActividadesPorMes}">
                                             <tr>
-                                                <c:forEach var="dato" items="${fila.values()}">
-                                                    <td><c:out value="${dato}" /></td>
-                                                </c:forEach>
+                                                <td><c:out value="${fila.anio}" /></td>
+                                                <td><c:out value="${fila.mes}" /></td>
+                                                <td><c:out value="${fila.total_actividades}" /></td>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
                                 </table>
-                                <canvas id="chartEspeciesRegistradasPorZona" style="max-width: 100%; max-height: 400px;"></canvas>
                             </c:when>
                             <c:otherwise>
                                 <p class="text-center text-muted">No hay datos disponibles.</p>
@@ -230,8 +201,94 @@
                 </div>
             </div>
         </div>
+
+        <!-- Gráfico Actividades por Mes -->
+        <div class="col-lg-6 col-md-12">
+            <div class="card">
+                <div class="card-header"><i class="fas fa-chart-line"></i> Actividades por Mes (Gráfico)</div>
+                <div class="card-body">
+                    <canvas id="chartActividadesPorMes" style="max-width: 100%; max-height: 400px;"></canvas>
+                </div>
+            </div>
+        </div>
     </div>
-  
+
+<!-- Fila única y tarjeta de ancho completo -->
+<div class="row">
+  <!-- Tarjeta 1: Tabla Especies por Zona -->
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fas fa-tree"></i> Especies Registradas por Zona
+      </div>
+      <div class="card-body">
+
+        <!-- Select para elegir la zona -->
+        <label for="zonaSelect">Selecciona Zona:</label>
+        <select name="zonaId_filter_actividades" id="zonaSelect" class="form-control mb-3">
+          <option value="">Todas</option>
+          <c:forEach var="zona" items="${zonasParaFiltro}">
+            <option value="${zona.id}" ${zona.id == selectedZonaIdActividades ? 'selected' : ''}>
+              ${zona.nombre}
+            </option>
+          </c:forEach>
+        </select>
+
+        <div class="table-responsive">
+          <c:choose>
+            <c:when test="${not empty reporteEspeciesZonaFijo}">
+              <table id="tablaEspeciesZona" class="table table-striped table-hover table-bordered">
+                <thead>
+                  <tr>
+                    <th>ID Zona</th>
+                    <th>Zona</th>
+                    <th>Nombre Especie</th>
+                    <th>Nombre Científico</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <c:forEach var="fila" items="${reporteEspeciesZonaFijo}">
+                    <tr data-zona="${fila['ZonaId']}">
+                      <c:forEach var="dato" items="${fila.values()}">
+                        <td><c:out value="${dato}" /></td>
+                      </c:forEach>
+                    </tr>
+                  </c:forEach>
+                </tbody>
+              </table>
+            </c:when>
+            <c:otherwise>
+              <p class="text-center text-muted">No hay datos disponibles.</p>
+            </c:otherwise>
+          </c:choose>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('zonaSelect').addEventListener('change', function() {
+    const selectedZona = this.value; // No usar trim() si son números
+    const filas = document.querySelectorAll('#tablaEspeciesZona tbody tr');
+
+    filas.forEach(fila => {
+      const zonaFila = fila.dataset.zona; // Acceder mediante dataset
+      
+      // Comparación estricta (===) si los tipos coinciden
+      if (selectedZona === "" || zonaFila === selectedZona) {
+        fila.style.display = 'table-row';
+      } else {
+        fila.style.display = 'none';
+      }
+    });
+  });
+});
+</script>
+
 
     <!-- Script para generar gráfico -->
     <script>
@@ -320,70 +377,58 @@ new Chart(ctxBarras, {
     }
 
 });
+</script>
 
+<script>
+    // Validamos que el elemento exista
+    const ctxActividadesPorMes = document.getElementById('chartActividadesPorMes');
+    if (ctxActividadesPorMes) {
+        const actividadesLabels = [];
+        const actividadesData = [];
 
-
-
-   // Definir las etiquetas y los valores del gráfico (tomados de los datos proporcionados en el servidor)
-    const etiquetasActividadesMes = [
-        <c:forEach var="fila" items="${reporteActividadesPorMes}" varStatus="status">
-            '${fila.mes}'<c:if test="${!status.last}">,</c:if>
+        <c:forEach var="fila" items="${reporteActividadesPorMes}">
+            actividadesLabels.push("${fila.mes}");
+            actividadesData.push(${fila.total_actividades});
         </c:forEach>
-    ];
 
-    const valoresActividadesMes = [
-        <c:forEach var="fila" items="${reporteActividadesPorMes}" varStatus="status">
-            ${fila.total_actividades}<c:if test="${!status.last}">,</c:if>
-        </c:forEach>
-    ];
-
-    // Crear el gráfico en el canvas especificado
-    const ctxActividadesMes = document.getElementById('chartActividadesPorMes').getContext('2d');
-    new Chart(ctxActividadesMes, {
-        type: 'line', // Tipo de gráfico (en este caso, una línea)
-        data: {
-            labels: etiquetasActividadesMes, // Etiquetas de los meses
-            datasets: [{
-                label: 'Total de Actividades', // Nombre del conjunto de datos
-                data: valoresActividadesMes, // Los valores de las actividades
-                fill: false, // No llenar el área debajo de la línea
-                borderColor: '#28a745', // Color del borde de la línea
-                tension: 0.1 // Curvatura de la línea
-            }]
-        },
-        options: {
-            responsive: true, // Hacer que el gráfico sea responsive
-            plugins: {
-                legend: {
-                    position: 'top', // Posición de la leyenda
-                    labels: {
-                        font: {
-                            size: 14 // Tamaño de la fuente de la leyenda
+        new Chart(ctxActividadesPorMes, {
+            type: 'line', // cambiamos a gráfico de línea
+            data: {
+                labels: actividadesLabels,
+                datasets: [{
+                    label: 'Total de Actividades',
+                    data: actividadesData,
+                    borderColor: 'rgba(75, 192, 192, 1)',       // color de la línea
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',  // color de los puntos
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    pointBackgroundColor: 'white',
+                    pointBorderColor: 'rgba(75, 192, 192, 1)',
+                    fill: false,
+                    tension: 0.4 // curva suave
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true },
+                    title: {
+                        display: true,
+                        text: 'Evolución mensual de actividades'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0
                         }
                     }
                 }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true, // Asegurarse de que el eje Y comience en 0
-                    ticks: {
-                        stepSize: 1 // Tamaño de los pasos en el eje Y
-                    }
-                }
             }
-        }
-    });
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+        });
+    }
 </script>
+
 </body>
 </html>

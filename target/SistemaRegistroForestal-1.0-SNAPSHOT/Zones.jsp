@@ -18,6 +18,8 @@
     .container {
         margin-left: 250px; /* Puedes ajustar a lo que mida tu sidebar */
         transition: margin-left 0.3s ease;
+        margin-left: auto !important;
+        margin-right: auto !important;
     }
 
     @media (max-width: 768px) {

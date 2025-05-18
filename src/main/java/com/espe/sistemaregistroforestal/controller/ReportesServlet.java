@@ -111,8 +111,8 @@ public class ReportesServlet extends HttpServlet {
         String sql = null;
 
         if ("especiesPorZonaSimple".equals(reportIdentifier)) {
-            sql = "SELECT z.nombre AS \"Zona\", ts.nombre_comun AS \"Nombre Común\", ts.nombre_cientifico AS \"Nombre Científico\" " +
-                  "FROM tree_species ts JOIN zones z ON ts.zona_id = z.id ORDER BY z.nombre, ts.nombre_comun";
+            sql = "SELECT z.id AS \"ZonaId\", z.nombre AS \"Zona\", ts.nombre_comun AS \"Nombre Común\", ts.nombre_cientifico AS \"Nombre Científico\" " +
+              "FROM tree_species ts JOIN zones z ON ts.zona_id = z.id ORDER BY z.nombre, ts.nombre_comun";
         }
 
         if (sql == null) return results;
