@@ -2,7 +2,9 @@ package com.espe.sistemaregistroforestal.service;
 
 import com.espe.sistemaregistroforestal.dao.ConservationActivitiesDAO;
 import com.espe.sistemaregistroforestal.model.ConservationActivities;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public class ConservativonActivitiesService {
     
@@ -36,4 +38,5 @@ public class ConservativonActivitiesService {
     public void borrarActividadLogica(int id) {
         conservationActivitiesDAO.borrarActividadLogica(id);
     }
+   
 }

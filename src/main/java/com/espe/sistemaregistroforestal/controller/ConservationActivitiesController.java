@@ -10,8 +10,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "ConservationActivitiesController", urlPatterns = {"/ConservationActivities"})
 public class ConservationActivitiesController extends HttpServlet {
@@ -38,7 +40,7 @@ public class ConservationActivitiesController extends HttpServlet {
                 int deleteId = Integer.parseInt(request.getParameter("id"));
                 service.borrarActividadLogica(deleteId); // Llamada al servicio para realizar el borrado lógico
                 response.sendRedirect(request.getContextPath() + "/ConservationActivities"); // Redirigir de vuelta a la lista
-                break;    
+                break;
             default:
                 List<ConservationActivities> lista = service.listarActividades();
                 request.setAttribute("listaActividades", lista);

@@ -8,7 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ConservationActivitiesDAO {
     
@@ -138,14 +140,15 @@ public class ConservationActivitiesDAO {
     }
     
     public void borrarActividadLogica(int id) {
-    String sql = "UPDATE conservation_activities SET activo = FALSE WHERE id = ?";
+        String sql = "UPDATE conservation_activities SET activo = FALSE WHERE id = ?";
 
-    try (Connection conn = ConnectionBdd.getConexion();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
-        stmt.setInt(1, id);
-        stmt.executeUpdate();
-    } catch (SQLException e) {
-        e.printStackTrace();
+        try (Connection conn = ConnectionBdd.getConexion();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-}
+       
 }
