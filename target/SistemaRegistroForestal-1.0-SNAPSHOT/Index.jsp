@@ -6,10 +6,10 @@
         font-family: 'Poppins', sans-serif;
         background-color: #f9f9f9;
         color: #333;
-        padding-top: 70px; /* Espacio para el menú superior fijo */
+        padding-top: 70px; 
     }
     
-    /* Sección Hero */
+    
     .hero-section {
         background: linear-gradient(rgba(0, 95, 64, 0.7), rgba(0, 95, 64, 0.9)), 
                     url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80');
@@ -36,7 +36,7 @@
         margin: 0 auto;
     }
     
-    /* Secciones */
+   
     section {
         padding: 60px 20px;
         margin-bottom: 40px;
@@ -110,7 +110,7 @@
         margin-bottom: 15px;
     }
     
-    /* Proyectos */
+  
     .proyectos-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -182,7 +182,7 @@
         box-shadow: 0 8px 15px rgba(0, 95, 64, 0.3);
     }
     
-    /* Contacto */
+   
     #contacto form {
         max-width: 600px;
         margin: 40px auto 0;
@@ -221,7 +221,7 @@
         background-color: #007a52;
     }
     
-    /* Footer */
+  
     footer {
         background-color: #005f40;
         color: white;
@@ -257,7 +257,7 @@
         transform: translateY(-3px);
     }
     
-    /* Responsive */
+ 
     @media (max-width: 768px) {
         .hero-section {
             padding: 80px 15px;
@@ -278,15 +278,15 @@
     }
 </style>
 
-<!-- Sección Hero -->
+
 <section class="hero-section">
     <h1>Conservación Forestal: Protegiendo el Futuro</h1>
     <p>Nuestro compromiso es preservar y restaurar los ecosistemas forestales para las generaciones futuras.</p>
 </section>
 
-<!-- Contenido principal -->
+
 <main class="container">
-    <!-- Importancia de los bosques -->
+    
     <section id="importancia">
         <h2>¿Por qué son importantes los bosques?</h2>
         <div class="beneficios">
@@ -316,7 +316,7 @@
         </div>
     </section>
     
-    <!-- Proyectos de conservación -->
+   
     <section id="proyectos">
         <h2>Nuestros Proyectos de Conservación</h2>
         <div class="proyectos-grid">
@@ -338,14 +338,14 @@
         </div>
     </section>
     
-    <!-- Educación ambiental -->
+ 
     <section id="educacion">
         <h2>Educación Ambiental</h2>
         <p>Ofrecemos talleres, charlas y programas para concientizar sobre la importancia de los bosques y promover prácticas sostenibles en comunidades y escuelas.</p>
         <button class="cta-button">Únete a Nuestros Talleres</button>
     </section>
     
-    <!-- Contacto -->
+ 
     <section id="contacto">
         <h2>Contáctanos</h2>
         <form>
@@ -367,7 +367,7 @@
 </footer>
 
 <script>
-    // Comprobar si la biblioteca feather está disponible antes de intentar usarla
+
     if (typeof feather !== 'undefined') {
         feather.replace();
     }

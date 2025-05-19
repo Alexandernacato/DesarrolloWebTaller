@@ -35,6 +35,6 @@ public class TreeSpeciesService {
         treeSpeciesDAO.eliminarEspecie(id);
     }
    public boolean validarZonaExistente(int zonaId) {
-        return treeSpeciesDAO.validarZonaExistente(zonaId); // Devuelve true si la zona existe, false si no
+        return treeSpeciesDAO.validarZonaExistente(zonaId); 
     }
 }

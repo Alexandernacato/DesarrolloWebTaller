@@ -56,7 +56,7 @@ public class ZonesController extends HttpServlet {
             throws ServletException, IOException {
         System.out.println("ZonesController.doPost() ejecutándose");
         
-        // Obtener todos los parámetros
+      
         String idParam = request.getParameter("id");
         String nombre = request.getParameter("nombre");
         String ubicacion = request.getParameter("ubicacion");
@@ -66,7 +66,7 @@ public class ZonesController extends HttpServlet {
         String descripcion = request.getParameter("descripcion");
         String fechaRegistroParam = request.getParameter("fecha_registro");
 
-        // Depuración
+    
         System.out.println("ID: " + idParam);
         System.out.println("Nombre: " + nombre);
         System.out.println("Ubicación: " + ubicacion);
@@ -76,21 +76,21 @@ public class ZonesController extends HttpServlet {
         System.out.println("Descripción: " + descripcion);
         System.out.println("Fecha Registro: " + fechaRegistroParam);
 
-        // Crear y llenar el objeto
+   
         Zones zone = new Zones();
         zone.setNombre(nombre);
         zone.setUbicacion(ubicacion);
         zone.setProvincia(provincia);
         zone.setTipo_bosque(TipoBosque.fromString(tipoBosqueParam));
         
-        // Validar y convertir área en hectáreas
+     
         if (areaHaParam != null && !areaHaParam.isEmpty()) {
             zone.setArea_ha(new BigDecimal(areaHaParam.replace(",", ".")));
         }
         
         zone.setDescripcion(descripcion);
         
-        // Manejar la fecha
+     
         if (fechaRegistroParam != null && !fechaRegistroParam.isEmpty()) {
             try {
                 zone.setFecha_registro(Date.valueOf(fechaRegistroParam));
@@ -102,7 +102,7 @@ public class ZonesController extends HttpServlet {
             zone.setFecha_registro(new Date(System.currentTimeMillis()));
         }
 
-        // Determinar si es inserción o actualización
+     
         if (idParam == null || idParam.isEmpty() || "0".equals(idParam)) {
             System.out.println("Insertando nueva zona: " + zone.getNombre());
             zonesService.insertarZona(zone);
@@ -112,7 +112,7 @@ public class ZonesController extends HttpServlet {
             zonesService.actualizarZona(zone);
         }
 
-        // Redirección después de guardar
+     
         response.sendRedirect(request.getContextPath() + "/zones");
     }
 }

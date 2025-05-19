@@ -25,6 +25,6 @@ public enum TipoBosque {
                 }
             }
         }
-        return OTRO; // Valor por defecto si no coincide
+        return OTRO; 
     }
 }

@@ -63,21 +63,21 @@ public class ConservationActivitiesController extends HttpServlet {
         System.out.println("Verificando existencia de zona con ID: " + zonaId);
         
           if (!service.validarZonaExistente(zonaId)) {
-            // Si la zona no existe, mostrar el mensaje de alerta y volver al formulario
+       
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println("<script>");
             out.println("alert('La zona con ID " + zonaId + " no existe.');");
-            out.println("window.history.back();");  // Regresa a la página anterior (manteniendo el formulario)
+            out.println("window.history.back();");  
             out.println("</script>");
-            return; // Evita que el código continúe y realiza la validación
+            return; 
         }
 
         ConservationActivities actividad = new ConservationActivities();
         actividad.setNombreActividad(nombre);
         actividad.setFechaActividad(LocalDate.parse(fechaStr));
         actividad.setResponsable(responsable);
-        actividad.setTipoActividad(TipoActividad.fromString(tipoActividad)); // Método que debes tener en el enum
+        actividad.setTipoActividad(TipoActividad.fromString(tipoActividad)); 
         actividad.setDescripcion(descripcion);
         actividad.setZonaId(zonaId);
         

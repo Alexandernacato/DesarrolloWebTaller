@@ -71,9 +71,9 @@ public class TreeSpeciesController extends HttpServlet {
     PrintWriter out = response.getWriter();
     out.println("<script>");
     out.println("alert('La zona con ID " + zonaId + " no existe.');");
-    out.println("window.history.back();");  // Esto hace que el formulario se mantenga en la misma página
+    out.println("window.history.back();"); 
     out.println("</script>");
-    return;  // Evita que el código posterior se ejecute si la zona no existe
+    return;  
 }    
         System.out.println("Nombre común: " + nombreComun);
         System.out.println("Nombre científico: " + nombreCientifico);

@@ -11,18 +11,18 @@
 <body>
     <h1>${empty zone.id || zone.id == 0 ? 'Agregar Nueva Zona' : 'Editar Zona'}</h1>
     
-    <!-- Encabezado del modal -->
+  
     <div class="modal-header">
         <h5 class="modal-title">${empty zone.id || zone.id == 0 ? 'Nueva Zona' : 'Editar Zona'}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
     </div>
   
-    <!-- Formulario dentro del cuerpo del modal -->
+  
     <form action="${pageContext.request.contextPath}/zones" method="post" id="zonaForm">
         <div class="modal-body">
-            <!-- Campo oculto para el ID -->
+        
             <input type="hidden" name="id" value="${empty zone.id ? 0 : zone.id}">
-            <!-- Campo oculto para la opción -->
+       
             <input type="hidden" name="option" value="save">
             
             <div class="mb-3">

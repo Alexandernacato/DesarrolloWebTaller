@@ -29,7 +29,7 @@ public class ConservationActivitiesDAO {
                 actividad.setFechaActividad(rs.getDate("fecha_actividad").toLocalDate());
                 actividad.setResponsable(rs.getString("responsable"));
 
-                // Conversión String -> Enum
+              
                 String tipoStr = rs.getString("tipo_actividad");
                 actividad.setTipoActividad(TipoActividad.fromString(tipoStr));
 
@@ -51,7 +51,7 @@ public class ConservationActivitiesDAO {
         String sqlConservacionZona = "INSERT INTO conservation_zona (conservation_id, zona_id) VALUES (?, ?)";
 
         try (Connection conn = ConnectionBdd.getConexion()) {
-            // Insertar en conservation_activities y obtener id generado
+           
             try (PreparedStatement stmt = conn.prepareStatement(sqlActividad, Statement.RETURN_GENERATED_KEYS)) {
                 stmt.setString(1, actividad.getNombreActividad());
                 stmt.setDate(2, java.sql.Date.valueOf(actividad.getFechaActividad()));
@@ -67,7 +67,7 @@ public class ConservationActivitiesDAO {
                     int idGenerado = generatedKeys.getInt(1);
                     System.out.println("ID insertado: " + idGenerado);
 
-                    // Insertar en tabla intermedia conservation_zona
+                   
                     try (PreparedStatement stmtZona = conn.prepareStatement(sqlConservacionZona)) {
                         stmtZona.setInt(1, idGenerado);
                         stmtZona.setInt(2, actividad.getZonaId());
@@ -100,7 +100,7 @@ public class ConservationActivitiesDAO {
                 actividad.setFechaActividad(rs.getDate("fecha_actividad").toLocalDate());
                 actividad.setResponsable(rs.getString("responsable"));
 
-                // Conversión String -> Enum
+               
                 actividad.setTipoActividad(TipoActividad.fromString(rs.getString("tipo_actividad")));
 
                 actividad.setDescripcion(rs.getString("descripcion"));
@@ -125,7 +125,7 @@ public class ConservationActivitiesDAO {
             stmt.setDate(2, java.sql.Date.valueOf(actividad.getFechaActividad()));
             stmt.setString(3, actividad.getResponsable());
 
-            // Enum -> String para la BD
+          
             stmt.setString(4, actividad.getTipoActividad().getDisplayName());
 
             stmt.setString(5, actividad.getDescripcion());
@@ -157,19 +157,19 @@ public boolean validarZonaExistente(int zonaId) {
     try (Connection conn = ConnectionBdd.getConexion();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
         
-        stmt.setInt(1, zonaId);  // Asignamos el valor de zonaId al parámetro de la consulta
+        stmt.setInt(1, zonaId);  
         ResultSet rs = stmt.executeQuery();
         
         if (rs.next()) {
-            int count = rs.getInt(1);  // Obtenemos el número de registros que coinciden con el ID
-            return count > 0;  // Si count > 0, la zona existe
+            int count = rs.getInt(1);  
+            return count > 0;  
         }
         
     } catch (SQLException e) {
         e.printStackTrace();
     }
     
-    return false;  // Si no existe, retornamos false
+    return false;  
 }
 
        

@@ -13,10 +13,7 @@ import java.math.BigDecimal;
 
 import java.sql.SQLException;
 
-/**
- *
- * @author alexa
- */
+
 public class ZonesDAO {
 
     public static boolean crear(Zones zona) {
@@ -32,8 +29,7 @@ public class ZonesDAO {
             if (zona.getFecha_registro() != null) {
                 pstmt.setDate(7, zona.getFecha_registro());
             } else {
-                // Si la BD tiene DEFAULT CURDATE(), no es necesario enviarlo si es null.
-                // O puedes establecerlo explícitamente si es necesario:
+            
                  pstmt.setDate(7, new Date(System.currentTimeMillis()));
             }
             return pstmt.executeUpdate() > 0;
@@ -56,7 +52,7 @@ public class ZonesDAO {
                 zona.setNombre(rs.getString("nombre"));
                 zona.setUbicacion(rs.getString("ubicacion"));
                 zona.setProvincia(rs.getString("provincia"));
-                zona.setTipo_bosque(TipoBosque.fromString(rs.getString("tipo_bosque"))); // MODIFICADO
+                zona.setTipo_bosque(TipoBosque.fromString(rs.getString("tipo_bosque"))); 
                 zona.setArea_ha(rs.getBigDecimal("area_ha"));
                 zona.setDescripcion(rs.getString("descripcion"));
                 zona.setFecha_registro(rs.getDate("fecha_registro"));
@@ -88,10 +84,10 @@ public class ZonesDAO {
                             zona.setTipo_bosque(TipoBosque.fromString(tipoBosqueStr));
                         } catch (Exception e) {
                             System.err.println("Error al convertir tipo_bosque: " + e.getMessage());
-                            zona.setTipo_bosque(TipoBosque.OTRO); // Valor predeterminado
+                            zona.setTipo_bosque(TipoBosque.OTRO); 
                         }
                     } else {
-                        zona.setTipo_bosque(TipoBosque.OTRO); // Valor predeterminado si es null
+                        zona.setTipo_bosque(TipoBosque.OTRO); 
                     }
 
                     zona.setArea_ha(rs.getBigDecimal("area_ha"));

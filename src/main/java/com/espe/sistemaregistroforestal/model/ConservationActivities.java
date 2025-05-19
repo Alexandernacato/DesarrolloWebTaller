@@ -10,8 +10,7 @@ public class ConservationActivities {
     private TipoActividad tipoActividad;
     private String descripcion;
     private int zonaId;
-    private boolean activo = true; // Valor predeterminado
-
+    private boolean activo = true; 
     public ConservationActivities() {
     }
 
