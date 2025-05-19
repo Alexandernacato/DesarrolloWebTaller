@@ -10,12 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Reportes Forestales</title>
 
-    <!-- Estilos y Fuentes -->
+   
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Chart.js -->
+ 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
@@ -77,9 +77,9 @@
 <div class="container dashboard-container">
     <h2 class="text-center page-title">Especies existentes en cada Zona</h2>
 
-    <!-- Primera fila: Cantidad de Especies por Zona -->
+ 
     <div class="row mb-4 same-height-row">
-        <!-- Tabla Cantidad de Especies por Zona -->
+   
         <div class="col-lg-6 col-md-12">
             <div class="card">
                 <div class="card-header"><i class="fas fa-leaf"></i> Cantidad de Especies por Zona (Tabla)</div>
@@ -106,7 +106,7 @@
             </div>
         </div>
 
-        <!-- Gráfico Cantidad de Especies por Zona -->
+   
         <div class="col-lg-6 col-md-12">
             <div class="card">
                 <div class="card-header"><i class="fas fa-chart-bar"></i> Cantidad de Especies por Zona (Gráfico)</div>
@@ -117,9 +117,9 @@
         </div>
     </div>
 
-    <!-- Segunda fila: Cantidad de Zonas por Tipo de Actividad -->
+
     <div class="row mb-4 same-height-row">
-        <!-- Tabla Cantidad de Zonas por Tipo de Actividad -->
+  
         <div class="col-lg-6 col-md-12">
             <div class="card">
                 <div class="card-header"><i class="fas fa-chart-pie"></i> Cantidad de Zonas por Tipo de Actividad (Tabla)</div>
@@ -153,7 +153,7 @@
             </div>
         </div>
 
-        <!-- Gráfico Cantidad de Zonas por Tipo de Actividad -->
+        
         <div class="col-lg-6 col-md-12">
             <div class="card">
                 <div class="card-header"><i class="fas fa-chart-pie"></i> Cantidad de Zonas por Tipo de Actividad (Gráfico)</div>
@@ -164,9 +164,9 @@
         </div>
     </div>
         
-    <!-- Tercera fila: Actividades por Mes -->
+  
     <div class="row mb-4 same-height-row">
-        <!-- Tabla Actividades por Mes -->
+   
         <div class="col-lg-6 col-md-12">
             <div class="card">
                 <div class="card-header"><i class="fas fa-calendar-alt"></i> Actividades por Mes (Tabla)</div>
@@ -202,7 +202,7 @@
             </div>
         </div>
 
-        <!-- Gráfico Actividades por Mes -->
+      
         <div class="col-lg-6 col-md-12">
             <div class="card">
                 <div class="card-header"><i class="fas fa-chart-line"></i> Actividades por Mes (Gráfico)</div>
@@ -213,9 +213,9 @@
         </div>
     </div>
 
-<!-- Fila única y tarjeta de ancho completo -->
+
 <div class="row">
-  <!-- Tarjeta 1: Tabla Especies por Zona -->
+
   <div class="col-12">
     <div class="card">
       <div class="card-header">
@@ -223,7 +223,7 @@
       </div>
       <div class="card-body">
 
-        <!-- Select para elegir la zona -->
+      
         <label for="zonaSelect">Selecciona Zona:</label>
         <select name="zonaId_filter_actividades" id="zonaSelect" class="form-control mb-3">
           <option value="">Todas</option>
@@ -272,13 +272,13 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('zonaSelect').addEventListener('change', function() {
-    const selectedZona = this.value; // No usar trim() si son números
+    const selectedZona = this.value; 
     const filas = document.querySelectorAll('#tablaEspeciesZona tbody tr');
 
     filas.forEach(fila => {
-      const zonaFila = fila.dataset.zona; // Acceder mediante dataset
+      const zonaFila = fila.dataset.zona; 
       
-      // Comparación estricta (===) si los tipos coinciden
+     
       if (selectedZona === "" || zonaFila === selectedZona) {
         fila.style.display = 'table-row';
       } else {
@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 
-    <!-- Script para generar gráfico -->
+  
     <script>
         const etiquetasActividad = [
             <c:forEach var="fila" items="${reporteCantidadZonasPorTipoActividad}" varStatus="status">
@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Gráfico de barras - Cantidad de Especies por Zona
+        
 const etiquetasZonas = [
     <c:forEach var="fila" items="${reporteCantidadEspeciesPorZona}" varStatus="status">
         '${fila["Zona"]}'<c:if test="${!status.last}">,</c:if>
@@ -380,7 +380,7 @@ new Chart(ctxBarras, {
 </script>
 
 <script>
-    // Validamos que el elemento exista
+  
     const ctxActividadesPorMes = document.getElementById('chartActividadesPorMes');
     if (ctxActividadesPorMes) {
         const actividadesLabels = [];
@@ -392,20 +392,20 @@ new Chart(ctxBarras, {
         </c:forEach>
 
         new Chart(ctxActividadesPorMes, {
-            type: 'line', // cambiamos a gráfico de línea
+            type: 'line', 
             data: {
                 labels: actividadesLabels,
                 datasets: [{
                     label: 'Total de Actividades',
                     data: actividadesData,
-                    borderColor: 'rgba(75, 192, 192, 1)',       // color de la línea
-                    backgroundColor: 'rgba(75, 192, 192, 0.6)',  // color de los puntos
+                    borderColor: 'rgba(75, 192, 192, 1)',      
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',  
                     pointRadius: 5,
                     pointHoverRadius: 7,
                     pointBackgroundColor: 'white',
                     pointBorderColor: 'rgba(75, 192, 192, 1)',
                     fill: false,
-                    tension: 0.4 // curva suave
+                    tension: 0.4 
                 }]
             },
             options: {
