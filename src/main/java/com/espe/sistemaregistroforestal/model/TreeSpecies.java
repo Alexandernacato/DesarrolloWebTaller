@@ -4,10 +4,7 @@
  */
 package com.espe.sistemaregistroforestal.model;
 
-/**
- *
- * @author alexa
- */
+
 public class TreeSpecies {
     private int id;
     private String nombreComun;

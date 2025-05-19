@@ -10,8 +10,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "ConservationActivitiesController", urlPatterns = {"/ConservationActivities"})
 public class ConservationActivitiesController extends HttpServlet {
@@ -38,7 +40,7 @@ public class ConservationActivitiesController extends HttpServlet {
                 int deleteId = Integer.parseInt(request.getParameter("id"));
                 service.borrarActividadLogica(deleteId); // Llamada al servicio para realizar el borrado lógico
                 response.sendRedirect(request.getContextPath() + "/ConservationActivities"); // Redirigir de vuelta a la lista
-                break;    
+                break;
             default:
                 List<ConservationActivities> lista = service.listarActividades();
                 request.setAttribute("listaActividades", lista);
@@ -57,14 +59,30 @@ public class ConservationActivitiesController extends HttpServlet {
         String tipoActividad = request.getParameter("tipoActividad");
         String descripcion = request.getParameter("descripcion");
         int zonaId = Integer.parseInt(request.getParameter("zonaId"));
+        
+        System.out.println("Verificando existencia de zona con ID: " + zonaId);
+        
+          if (!service.validarZonaExistente(zonaId)) {
+       
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('La zona con ID " + zonaId + " no existe.');");
+            out.println("window.history.back();");  
+            out.println("</script>");
+            return; 
+        }
 
         ConservationActivities actividad = new ConservationActivities();
         actividad.setNombreActividad(nombre);
         actividad.setFechaActividad(LocalDate.parse(fechaStr));
         actividad.setResponsable(responsable);
-        actividad.setTipoActividad(TipoActividad.fromString(tipoActividad)); // Método que debes tener en el enum
+        actividad.setTipoActividad(TipoActividad.fromString(tipoActividad)); 
         actividad.setDescripcion(descripcion);
         actividad.setZonaId(zonaId);
+        
+         
+        
 
         if (idParam == null || idParam.isEmpty()) {
             service.insertarActividad(actividad);

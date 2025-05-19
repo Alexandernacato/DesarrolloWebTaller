@@ -1,3 +1,4 @@
+<%@ include file="menu.jsp" %> <!-- Incluye el menú principal -->
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="es">
@@ -8,7 +9,20 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/2.3.0/css/dataTables.bootstrap5.css" rel="stylesheet">
-    
+        <style>
+    .container {
+        margin-left: 250px; /* Puedes ajustar a lo que mida tu sidebar */
+        transition: margin-left 0.3s ease;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            margin-left: 0;
+        }
+    }
+</style>
     <style>
         table#conservationActivitiesTable {
             width: 100% !important;
@@ -73,25 +87,25 @@
     <div class="modal fade" id="modalFormulario" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content" id="contenidoModal">
-                <!-- El contenido se cargará aquí -->
+                
             </div>
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
-    <!-- Bootstrap JS (con Popper) -->
+   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 
-    <!-- DataTables JS -->
+    
     <script src="https://cdn.datatables.net/2.3.0/js/dataTables.js"></script>
 
-    <!-- DataTables Bootstrap JS -->
+    
     <script src="https://cdn.datatables.net/2.3.0/js/dataTables.bootstrap5.js"></script>
 
     <script>
     $(document).ready(function(){
-        // Abrir modal para agregar nueva actividad
+    
         $('#abrirModal').click(function(e){
             e.preventDefault();
 
@@ -102,7 +116,7 @@
             });
         });
 
-        // Abrir modal para editar actividad
+
         $('[id^="editar_"]').click(function(e){
             e.preventDefault();
 

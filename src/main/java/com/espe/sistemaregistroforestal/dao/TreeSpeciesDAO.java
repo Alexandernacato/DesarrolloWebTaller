@@ -13,10 +13,7 @@ import java.sql.Statement;
     import java.util.ArrayList;
     import java.util.List;
 
-    /**
-     *
-     * @author alexa
-     */
+ 
     public class TreeSpeciesDAO {
          public List<TreeSpecies> listarEspecies() {
             List<TreeSpecies> lista = new ArrayList<>();
@@ -52,7 +49,7 @@ import java.sql.Statement;
     String sql = "INSERT INTO tree_species (nombre_comun, nombre_cientifico, familia_botanica, estado_conservacion, uso_principal, altura_maxima_m, zona_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     try (Connection conn = ConnectionBdd.getConexion();
-         PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {  // Aquí agregamos RETURN_GENERATED_KEYS
+         PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {  
 
         stmt.setString(1, especie.getNombreComun());
         stmt.setString(2, especie.getNombreCientifico());
@@ -64,10 +61,10 @@ import java.sql.Statement;
 
         stmt.executeUpdate();
 
-        // Obtener el ID generado automáticamente
+    
         ResultSet generatedKeys = stmt.getGeneratedKeys();
         if (generatedKeys.next()) {
-            int idGenerado = generatedKeys.getInt(1);  // El ID generado está en la primera columna
+            int idGenerado = generatedKeys.getInt(1);  
             System.out.println("ID insertado: " + idGenerado);
         }
 
@@ -140,7 +137,29 @@ import java.sql.Statement;
                 e.printStackTrace();
             }
         }
+        public boolean validarZonaExistente(int zonaId) {
+    String sql = "SELECT COUNT(*) FROM zones WHERE id = ?";
+    
+    try (Connection conn = ConnectionBdd.getConexion();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        
+        stmt.setInt(1, zonaId);  
+        ResultSet rs = stmt.executeQuery();
+        
+        if (rs.next()) {
+            int count = rs.getInt(1);  
+            return count > 0; 
+        }
+        
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    
+    return false;  
+}
+
+
+
 
     }
-
 

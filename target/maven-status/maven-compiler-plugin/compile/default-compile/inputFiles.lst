@@ -1,18 +1,19 @@
-C:\Users\gamur\OneDrive - UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE\ESPE V NIVEL SI2025\temp\WA\T1\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\controller\ConservationActivitiesController.java
-C:\Users\gamur\OneDrive - UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE\ESPE V NIVEL SI2025\temp\WA\T1\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\JakartaRestConfiguration.java
-C:\Users\gamur\OneDrive - UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE\ESPE V NIVEL SI2025\temp\WA\T1\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\dao\ConnectionBdd.java
-C:\Users\gamur\OneDrive - UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE\ESPE V NIVEL SI2025\temp\WA\T1\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\dao\ZonesDAO.java
-C:\Users\gamur\OneDrive - UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE\ESPE V NIVEL SI2025\temp\WA\T1\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\resources\JakartaEE10Resource.java
-C:\Users\gamur\OneDrive - UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE\ESPE V NIVEL SI2025\temp\WA\T1\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\controller\TreeSpeciesController.java
-C:\Users\gamur\OneDrive - UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE\ESPE V NIVEL SI2025\temp\WA\T1\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\service\ConservativonActivitiesService.java
-C:\Users\gamur\OneDrive - UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE\ESPE V NIVEL SI2025\temp\WA\T1\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\dao\ConservationActivitiesDAO.java
-C:\Users\gamur\OneDrive - UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE\ESPE V NIVEL SI2025\temp\WA\T1\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\model\ConservationActivities.java
-C:\Users\gamur\OneDrive - UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE\ESPE V NIVEL SI2025\temp\WA\T1\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\model\Zones.java
-C:\Users\gamur\OneDrive - UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE\ESPE V NIVEL SI2025\temp\WA\T1\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\service\ZonesService.java
-C:\Users\gamur\OneDrive - UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE\ESPE V NIVEL SI2025\temp\WA\T1\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\model\TipoBosque.java
-C:\Users\gamur\OneDrive - UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE\ESPE V NIVEL SI2025\temp\WA\T1\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\model\TreeSpecies.java
-C:\Users\gamur\OneDrive - UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE\ESPE V NIVEL SI2025\temp\WA\T1\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\controller\ZonesController.java
-C:\Users\gamur\OneDrive - UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE\ESPE V NIVEL SI2025\temp\WA\T1\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\service\TreeSpeciesService.java
-C:\Users\gamur\OneDrive - UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE\ESPE V NIVEL SI2025\temp\WA\T1\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\dao\TreeSpeciesDAO.java
-C:\Users\gamur\OneDrive - UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE\ESPE V NIVEL SI2025\temp\WA\T1\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\TestConnection.java
-C:\Users\gamur\OneDrive - UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE\ESPE V NIVEL SI2025\temp\WA\T1\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\model\TipoActividad.java
+C:\Users\Administrador\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\TestConnection.java
+C:\Users\Administrador\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\service\TreeSpeciesService.java
+C:\Users\Administrador\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\dao\ConnectionBdd.java
+C:\Users\Administrador\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\dao\TreeSpeciesDAO.java
+C:\Users\Administrador\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\model\Zones.java
+C:\Users\Administrador\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\dao\ConservationActivitiesDAO.java
+C:\Users\Administrador\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\model\TreeSpecies.java
+C:\Users\Administrador\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\controller\ReportesServlet.java
+C:\Users\Administrador\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\model\TipoActividad.java
+C:\Users\Administrador\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\controller\TreeSpeciesController.java
+C:\Users\Administrador\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\service\ConservativonActivitiesService.java
+C:\Users\Administrador\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\controller\ConservationActivitiesController.java
+C:\Users\Administrador\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\service\ZonesService.java
+C:\Users\Administrador\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\model\ConservationActivities.java
+C:\Users\Administrador\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\model\TipoBosque.java
+C:\Users\Administrador\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\resources\JakartaEE10Resource.java
+C:\Users\Administrador\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\controller\ZonesController.java
+C:\Users\Administrador\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\JakartaRestConfiguration.java
+C:\Users\Administrador\DesarrolloWebTaller\src\main\java\com\espe\sistemaregistroforestal\dao\ZonesDAO.java

@@ -34,4 +34,7 @@ public class TreeSpeciesService {
     public void eliminarEspecie(int id) {
         treeSpeciesDAO.eliminarEspecie(id);
     }
+   public boolean validarZonaExistente(int zonaId) {
+        return treeSpeciesDAO.validarZonaExistente(zonaId); 
+    }
 }

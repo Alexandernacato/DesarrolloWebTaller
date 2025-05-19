@@ -1,13 +1,14 @@
+
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<!-- Encabezado del modal -->
+
 <div class="modal-header">
     <h5 class="modal-title">${treeSpecies != null ? "Editar Especie" : "Nueva Especie"}</h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
 </div>
 
-<!-- Formulario dentro del cuerpo del modal -->
+
 <form action="${pageContext.request.contextPath}/TreeSpecies" method="post">
     <div class="modal-body">
         <c:if test="${treeSpecies != null}">
@@ -57,9 +58,11 @@
         </div>
     </div>
 
-    <!-- Pie del modal -->
+
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
         <button type="submit" class="btn btn-primary">Guardar</button>
     </div>
+    
 </form>
+ <script src="${pageContext.request.contextPath}/JS/validacion.js"></script>

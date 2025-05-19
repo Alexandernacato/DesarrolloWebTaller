@@ -1,3 +1,4 @@
+<%@ include file="menu.jsp" %> <!-- Incluye el menú principal -->
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="es">
@@ -9,13 +10,33 @@
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/2.3.0/css/dataTables.bootstrap5.css" rel="stylesheet">
+    <style>
+
+    .container {
+        margin-left: auto !important; 
+        margin-right: auto !important; 
+        max-width: 1200px; 
+        transition: margin-left 0.3s ease;
+        padding: 0 15px; 
+    }
     
+    
+    table#treeSpeciesTable {
+        width: 100% !important;
+    }
+    
+  
+    table#treeSpeciesTable td:last-child {
+        white-space: nowrap;
+    }
+</style>
 </head>
 <body>
     <div class="container mt-5">
         <h2 class="text-center mb-4">Lista de Especies de Árboles</h2>
-        <a href="${pageContext.request.contextPath}/TreeSpecies?option=new" class="btn btn-primary mb-3" id="abrirModal">Agregar Nueva Especie</a>
-
+        <div class="text-center mb-3">
+            <a href="${pageContext.request.contextPath}/TreeSpecies?option=new" class="btn btn-primary" id="abrirModal">Agregar Nueva Especie</a>
+        </div>
        
         <table id="treeSpeciesTable" class="table table-bordered table-striped">
             <thead class="thead-dark">
@@ -57,7 +78,7 @@
     <div class="modal fade" id="modalFormulario" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content" id="contenidoModal">
-                <!-- El contenido se cargará aquí -->
+              
             </div>
         </div>
     </div>
@@ -65,39 +86,39 @@
    
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
-    <!-- Bootstrap JS (con Popper) -->
+ 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 
-    <!-- DataTables JS -->
+ 
     <script src="https://cdn.datatables.net/2.3.0/js/dataTables.js"></script>
 
-    <!-- DataTables Bootstrap JS -->
+   
     <script src="https://cdn.datatables.net/2.3.0/js/dataTables.bootstrap5.js"></script>
 
-    <!-- Script para abrir el modal -->
+
     <script>
     $(document).ready(function(){
-        // Capturar el clic en el enlace "Agregar Nueva Especie"
+      
         $('#abrirModal').click(function(e){
-            e.preventDefault();  // Prevenir la recarga de la página
+            e.preventDefault();  
 
-            var url = $(this).attr('href'); // Obtener la URL del enlace
+            var url = $(this).attr('href'); 
 
-            // Usar jQuery para cargar el contenido del formulario en el modal
+            
             $('#contenidoModal').load(url, function(){
-                $('#modalFormulario').modal('show'); // Mostrar el modal
+                $('#modalFormulario').modal('show'); 
             });
         });
 
-        // Capturar el clic en los enlaces "Editar"
+       
         $('[id^="editar_"]').click(function(e){
-            e.preventDefault();  // Prevenir la recarga de la página
+            e.preventDefault();  
 
-            var url = $(this).attr('href'); // Obtener la URL del enlace
+            var url = $(this).attr('href'); 
 
-            // Usar jQuery para cargar el contenido del formulario en el modal
+          
             $('#contenidoModal').load(url, function(){
-                $('#modalFormulario').modal('show'); // Mostrar el modal
+                $('#modalFormulario').modal('show'); 
             });
         });
     });
@@ -107,7 +128,7 @@
   
     <script>
         $(document).ready(function() {
-            $('#treeSpeciesTable').DataTable();  // Aplicar DataTables a la tabla
+            $('#treeSpeciesTable').DataTable();  
         });
     </script>
 </body>

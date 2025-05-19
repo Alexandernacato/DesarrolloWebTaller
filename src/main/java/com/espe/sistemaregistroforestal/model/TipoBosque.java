@@ -18,11 +18,13 @@ public enum TipoBosque {
     }
 
     public static TipoBosque fromString(String text) {
-        for (TipoBosque tipo : TipoBosque.values()) {
-            if (tipo.displayName.equalsIgnoreCase(text)) {
-                return tipo;
+        if (text != null) {
+            for (TipoBosque b : TipoBosque.values()) {
+                if (text.equalsIgnoreCase(b.displayName)) {
+                    return b;
+                }
             }
         }
-        return OTRO; // Valor por defecto
+        return OTRO; 
     }
 }

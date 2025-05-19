@@ -13,13 +13,13 @@
     }
 %>
 
-<!-- Modal header -->
+
 <div class="modal-header">
     <h5 class="modal-title"><%= actividad == null ? "Agregar Nueva" : "Editar" %> Actividad de Conservación</h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
 </div>
 
-<!-- Formulario dentro del cuerpo del modal -->
+
 <form action="ConservationActivities" method="POST">
     <div class="modal-body">
         <input type="hidden" name="id" value="<%= actividad != null ? actividad.getId() : "" %>">
@@ -74,3 +74,4 @@
         <button type="submit" class="btn btn-primary"><%= actividad == null ? "Agregar" : "Actualizar" %></button>
     </div>
 </form>
+ <script src="${pageContext.request.contextPath}/JS/validacion.js"></script>

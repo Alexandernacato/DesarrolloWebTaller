@@ -5,23 +5,24 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
     <title>${empty zone.id || zone.id == 0 ? 'Agregar' : 'Editar'} Zona</title>
 </head>
 <body>
     <h1>${empty zone.id || zone.id == 0 ? 'Agregar Nueva Zona' : 'Editar Zona'}</h1>
     
-    <!-- Encabezado del modal -->
+  
     <div class="modal-header">
         <h5 class="modal-title">${empty zone.id || zone.id == 0 ? 'Nueva Zona' : 'Editar Zona'}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
     </div>
-
-    <!-- Formulario dentro del cuerpo del modal -->
+  
+  
     <form action="${pageContext.request.contextPath}/zones" method="post" id="zonaForm">
         <div class="modal-body">
-            <!-- Campo oculto para el ID -->
+        
             <input type="hidden" name="id" value="${empty zone.id ? 0 : zone.id}">
-            <!-- Campo oculto para la opción -->
+       
             <input type="hidden" name="option" value="save">
             
             <div class="mb-3">
@@ -72,6 +73,8 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
+        
     </form>
+ <script src="${pageContext.request.contextPath}/JS/validacion.js"></script>
 </body>
 </html>

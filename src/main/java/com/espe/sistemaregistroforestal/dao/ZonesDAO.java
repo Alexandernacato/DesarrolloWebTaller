@@ -11,10 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.math.BigDecimal;
 
-/**
- *
- * @author alexa
- */
+import java.sql.SQLException;
+
+
 public class ZonesDAO {
 
     public static boolean crear(Zones zona) {
@@ -30,8 +29,7 @@ public class ZonesDAO {
             if (zona.getFecha_registro() != null) {
                 pstmt.setDate(7, zona.getFecha_registro());
             } else {
-                // Si la BD tiene DEFAULT CURDATE(), no es necesario enviarlo si es null.
-                // O puedes establecerlo explícitamente si es necesario:
+            
                  pstmt.setDate(7, new Date(System.currentTimeMillis()));
             }
             return pstmt.executeUpdate() > 0;
@@ -54,7 +52,7 @@ public class ZonesDAO {
                 zona.setNombre(rs.getString("nombre"));
                 zona.setUbicacion(rs.getString("ubicacion"));
                 zona.setProvincia(rs.getString("provincia"));
-                zona.setTipo_bosque(TipoBosque.fromString(rs.getString("tipo_bosque"))); // MODIFICADO
+                zona.setTipo_bosque(TipoBosque.fromString(rs.getString("tipo_bosque"))); 
                 zona.setArea_ha(rs.getBigDecimal("area_ha"));
                 zona.setDescripcion(rs.getString("descripcion"));
                 zona.setFecha_registro(rs.getDate("fecha_registro"));
@@ -65,52 +63,46 @@ public class ZonesDAO {
         return zona;
     }
 
-    public static List<Zones> obtenerTodos() {
-        List<Zones> zonas = new ArrayList<>();
-        String sql = "SELECT * FROM zones";
-        try (Connection conn = ConnectionBdd.getConexion();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-            
-            System.out.println("Ejecutando consulta: " + sql);
-            int count = 0;
-            
-            while (rs.next()) {
-                count++;
-                Zones zona = new Zones();
-                zona.setId(rs.getInt("id"));
-                zona.setNombre(rs.getString("nombre"));
-                System.out.println("Zona encontrada: ID=" + zona.getId() + ", Nombre=" + zona.getNombre());
-                
-                // Imprimir el valor de tipo_bosque directamente de la BD
-                String tipoBosqueStr = rs.getString("tipo_bosque");
-                System.out.println("Tipo bosque en BD: " + tipoBosqueStr);
-                
-                try {
-                    zona.setTipo_bosque(TipoBosque.fromString(tipoBosqueStr));
-                } catch (Exception e) {
-                    System.err.println("Error al convertir tipo_bosque '" + tipoBosqueStr + "': " + e.getMessage());
-                    zona.setTipo_bosque(TipoBosque.OTRO);
+        public static List<Zones> obtenerTodos() {
+            List<Zones> zonas = new ArrayList<>();
+            String sql = "SELECT id, nombre, ubicacion, provincia, tipo_bosque, area_ha, descripcion, fecha_registro FROM zones";
+            try (Connection conn = ConnectionBdd.getConexion();
+                 PreparedStatement stmt = conn.prepareStatement(sql);
+                 ResultSet rs = stmt.executeQuery()) {
+
+                System.out.println("Ejecutando obtenerTodos() de zones");
+                while (rs.next()) {
+                    Zones zona = new Zones();
+                    zona.setId(rs.getInt("id"));
+                    zona.setNombre(rs.getString("nombre"));
+                    zona.setUbicacion(rs.getString("ubicacion"));
+                    zona.setProvincia(rs.getString("provincia"));
+
+                    String tipoBosqueStr = rs.getString("tipo_bosque");
+                    if (tipoBosqueStr != null) {
+                        try {
+                            zona.setTipo_bosque(TipoBosque.fromString(tipoBosqueStr));
+                        } catch (Exception e) {
+                            System.err.println("Error al convertir tipo_bosque: " + e.getMessage());
+                            zona.setTipo_bosque(TipoBosque.OTRO); 
+                        }
+                    } else {
+                        zona.setTipo_bosque(TipoBosque.OTRO); 
+                    }
+
+                    zona.setArea_ha(rs.getBigDecimal("area_ha"));
+                    zona.setDescripcion(rs.getString("descripcion"));
+                    zona.setFecha_registro(rs.getDate("fecha_registro"));
+
+                    zonas.add(zona);
                 }
-                
-                // Continuar con el resto de campos...
-                zona.setUbicacion(rs.getString("ubicacion"));
-                zona.setProvincia(rs.getString("provincia"));
-                zona.setArea_ha(rs.getBigDecimal("area_ha"));
-                zona.setDescripcion(rs.getString("descripcion"));
-                zona.setFecha_registro(rs.getDate("fecha_registro"));
-                zonas.add(zona);
+                System.out.println("Total zonas recuperadas: " + zonas.size());
+            } catch (SQLException e) {
+                System.err.println("Error en obtenerTodos de ZonesDAO: " + e.getMessage());
+                e.printStackTrace();
             }
-            System.out.println("Total de zonas recuperadas: " + count);
-        } catch (SQLException e) {
-            System.err.println("Error SQL al obtener zonas: " + e.getMessage());
-            e.printStackTrace();
-        } catch (Exception e) {
-            System.err.println("Error general al obtener zonas: " + e.getMessage());
-            e.printStackTrace();
+            return zonas;
         }
-        return zonas;
-    }
 
     public static boolean actualizar(Zones zona) {
         String sql = "UPDATE zones SET nombre = ?, ubicacion = ?, provincia = ?, tipo_bosque = ?, area_ha = ?, descripcion = ?, fecha_registro = ? WHERE id = ?";
@@ -143,3 +135,4 @@ public class ZonesDAO {
         }
     }
 }
+
